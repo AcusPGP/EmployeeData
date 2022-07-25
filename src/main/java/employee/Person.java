@@ -2,6 +2,7 @@ package employee;
 
 public abstract class Person implements IGeneral {
     private String name;
+    private int id;
     private int age;
     private String address;
 
@@ -13,13 +14,21 @@ public abstract class Person implements IGeneral {
     }
 
     @Override
-    public void setName(String Name) {
-        this.name = Name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public String getName() {
         return this.name;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return this.id;
     }
 
     @Override
@@ -33,8 +42,8 @@ public abstract class Person implements IGeneral {
     }
 
     @Override
-    public void setAddress(String Address) {
-        this.address = Address;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     @Override

@@ -5,6 +5,10 @@ public interface IGeneral {
 
     public String getName();
 
+    public void setId(int id);
+
+    public int getId();
+
     public void setAge(int age);
 
     public int getAge();
