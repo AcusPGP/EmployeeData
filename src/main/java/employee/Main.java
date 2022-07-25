@@ -11,12 +11,14 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         String input;
         boolean exit = false;
+        Manage employee = new Manage();
         showMenu();
         while (true) {
             input = sc.nextLine();
             switch (input) {
                 case "1":
                     System.out.println("Success");
+                    employee.add();
                     break;
                 case "2":
                     System.out.println("Success");
@@ -32,6 +34,7 @@ public class Main {
                     exit = true;
                     break;
                 default:
+                    System.out.println(" ");
                     System.out.println("Invalid! Please choose an option in the below menu: ");
             }
             if (exit) {
