@@ -6,6 +6,7 @@ public abstract class Person implements IGeneral {
     private int age;
     private String address;
 
+    public Person () {}
     public Person(String name, int age, String address) {
         super();
         this.name = name;
