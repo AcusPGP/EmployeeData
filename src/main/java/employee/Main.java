@@ -17,17 +17,13 @@ public class Main {
             input = sc.nextLine();
             switch (input) {
                 case "1":
-                    System.out.println("Success");
                     employee.add();
                     break;
                 case "2":
-                    System.out.println("Success");
                     break;
                 case "3":
-                    System.out.println("Success");
                     break;
                 case "4":
-                    System.out.println("Success");
                     break;
                 case "5":
                     System.out.println("EXIT THE PROGRAM");
@@ -51,7 +47,7 @@ public class Main {
         System.out.println("2. Show the list of employees.");
         System.out.println("3. Edit and Update the employee's information.");
         System.out.println("4. Delete the employee's information.");
-        System.out.println("5. Exit ");
+        System.out.println("5. Exit. ");
         System.out.println("------------------------");
         System.out.print("Please choose an option: ");
     }
