@@ -1,17 +1,22 @@
 package employee;
 
-public abstract class Person implements IGeneral {
+public class Person implements IGeneral {
     private String name;
     private int id;
     private int age;
     private String address;
 
-    public Person () {}
-    public Person(String name, int age, String address) {
-        super();
+    private String type;
+
+    public Person() {
+    }
+
+    public Person(int id, String name, int age, String address, String type) {
         this.name = name;
         this.age = age;
         this.address = address;
+        this.id = id;
+        this.type = type;
     }
 
     @Override
@@ -21,7 +26,7 @@ public abstract class Person implements IGeneral {
 
     @Override
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public void setId(int id) {
@@ -29,7 +34,7 @@ public abstract class Person implements IGeneral {
     }
 
     public int getId() {
-        return this.id;
+        return id;
     }
 
     @Override
@@ -39,7 +44,7 @@ public abstract class Person implements IGeneral {
 
     @Override
     public int getAge() {
-        return this.age;
+        return age;
     }
 
     @Override
@@ -49,7 +54,20 @@ public abstract class Person implements IGeneral {
 
     @Override
     public String getAddress() {
-        return this.address;
+        return address;
+    }
+
+    @Override
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String toString() {
+        return "Employee [Id: " + id + ", Name: " + name + ", Age: " + age + ", Address: " + address +", Type: " + type;
     }
 }
 

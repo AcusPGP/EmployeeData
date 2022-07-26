@@ -16,4 +16,8 @@ public interface IGeneral {
     public void setAddress(String Address);
 
     public String getAddress();
+
+    public void setType(String type);
+
+    public String getType();
 }

@@ -7,7 +7,7 @@ public class Main {
         getInput();
     }
 
-    static void getInput() {
+    public static void getInput() {
         Scanner sc = new Scanner(System.in);
         String input;
         boolean exit = false;

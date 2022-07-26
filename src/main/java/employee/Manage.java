@@ -6,16 +6,16 @@ public class Manage {
     Scanner sc = new Scanner(System.in);
 
     public void add() {
-        Worker worker = new Worker();
-        Engineer engineer = new Engineer();
         showOption();
         String option = sc.nextLine();
+        Worker w = new Worker();
+        Engineer e = new Engineer();
         switch (option) {
             case "1":
-                worker.addWorker();
+                w.add();
                 break;
             case "2":
-                engineer.addEngineer();
+                e.add();
                 break;
             default:
                 System.out.println(" ");
