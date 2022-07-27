@@ -1,4 +1,4 @@
-package employee;
+package employee.pojo;
 
 public interface IGeneral {
     public void setName(String Name);

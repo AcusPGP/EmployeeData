@@ -1,19 +1,34 @@
-package employee;
+package employee.service;
 
+import employee.pojo.Engineer;
+
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
-public class Engineer extends Person {
+public class EngineerServiceImpl implements BaseService<Engineer>   {
     Scanner sc = new Scanner(System.in);
 
+    @Override
     public void add() {
         int id = inputId();
         String name = inputName();
         int age = inputAge();
         String address = inputAddress();
         String type = "engineer";
-        Person engineer = new Person(id, name, age, address, type);
+        Engineer en = new Engineer(id, name, age, address, type);
+        addToF(en);
     }
 
+    private void addToF(Engineer en) {
+        try {
+            FileWriter myList = new FileWriter("/Users/macbook/OOPProjects/Employee_Data/list.txt");
+            myList.write(en.toString());
+            myList.close();
+        } catch (IOException e) {
+            System.out.println();
+        }
+    }
     public int inputId() {
         System.out.print("Input the id: ");
         while (true) {
@@ -25,7 +40,6 @@ public class Engineer extends Person {
             }
         }
     }
-
     public String inputName() {
         System.out.print("Input the name: ");
         return sc.nextLine();
@@ -48,4 +62,9 @@ public class Engineer extends Person {
         return sc.nextLine();
     }
 
+
+    @Override
+    public void delete(Engineer object) {
+
+    }
 }

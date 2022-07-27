@@ -1,4 +1,4 @@
-package employee;
+package employee.pojo;
 
 public class Person implements IGeneral {
     private String name;
@@ -67,7 +67,7 @@ public class Person implements IGeneral {
     }
 
     public String toString() {
-        return "Employee [Id: " + id + ", Name: " + name + ", Age: " + age + ", Address: " + address +", Type: " + type;
+        return id + "@" + name + "@" + age + "@" + address + "@" + type;
     }
 }
 

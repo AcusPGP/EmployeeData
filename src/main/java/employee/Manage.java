@@ -1,5 +1,9 @@
 package employee;
 
+import employee.service.BaseService;
+import employee.service.EngineerServiceImpl;
+import employee.service.WorkerServiceImpl;
+
 import java.util.Scanner;
 
 public class Manage {
@@ -8,14 +12,13 @@ public class Manage {
     public void add() {
         showOption();
         String option = sc.nextLine();
-        Worker w = new Worker();
-        Engineer e = new Engineer();
         switch (option) {
             case "1":
-                w.add();
+                BaseService worker = new WorkerServiceImpl();
                 break;
             case "2":
-                e.add();
+                BaseService engineer  = new EngineerServiceImpl();
+                engineer.add();
                 break;
             default:
                 System.out.println(" ");
