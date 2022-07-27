@@ -1,6 +1,5 @@
 package employee;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class Worker extends Person {
@@ -12,7 +11,7 @@ public class Worker extends Person {
         int age = inputAge();
         String address = inputAddress();
         String type = "worker";
-        Person worker = new Person(id, name, age, address, type);
+        IGeneral worker = new Person(id, name, age, address, type);
     }
 
     public int inputId() {
