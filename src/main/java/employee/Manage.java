@@ -7,6 +7,9 @@ import employee.service.WorkerServiceImpl;
 import java.util.Scanner;
 
 public class Manage {
+
+    public static final String FILE_PATH = "/Users/macbook/OOPProjects/Employee_Data/list.txt";
+
     Scanner sc = new Scanner(System.in);
 
     public void add() {

@@ -1,12 +1,18 @@
 package employee.service;
 
 
+import employee.Manage;
 import employee.pojo.Engineer;
+
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
 public class EngineerServiceImpl implements BaseService<Engineer>   {
+
+
+
     Scanner sc = new Scanner(System.in);
 
     @Override
@@ -20,13 +26,24 @@ public class EngineerServiceImpl implements BaseService<Engineer>   {
         addToF(en);
     }
 
-    private void addToF(Engineer en) {
+    private boolean checkFileExist() {
+        File file = new File(Manage.FILE_PATH);
+        return file.exists();
+    }
+
+    private void addToF(Engineer en)  {
+        FileWriter myList = null;
         try {
-            FileWriter myList = new FileWriter("/Users/macbook/OOPProjects/Employee_Data/list.txt");
-            myList.write(en.toString());
+            if(checkFileExist()) {
+                myList = new FileWriter(Manage.FILE_PATH, true);
+                myList.write(en.toString() + "\n");
+            } else {
+                myList = new FileWriter(Manage.FILE_PATH);
+                myList.write(en.toString() + "\n");
+            }
             myList.close();
         } catch (IOException e) {
-            System.out.println();
+            System.out.println(e.getMessage());
         }
     }
     public int inputId() {
