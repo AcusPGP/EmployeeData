@@ -1,9 +1,10 @@
-package employee;
+package employee.pojo;
 
-import java.util.List;
+import employee.pojo.Person;
+
 import java.util.Scanner;
 
-public class Worker extends Person {
+public class Engineer extends Person {
     Scanner sc = new Scanner(System.in);
 
     public void add() {
@@ -11,8 +12,8 @@ public class Worker extends Person {
         String name = inputName();
         int age = inputAge();
         String address = inputAddress();
-        String type = "worker";
-        Person worker = new Person(id, name, age, address, type);
+        String type = "engineer";
+        Person engineer = new Person(id, name, age, address, type);
     }
 
     public int inputId() {

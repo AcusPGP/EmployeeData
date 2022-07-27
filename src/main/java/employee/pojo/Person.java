@@ -1,4 +1,4 @@
-package employee;
+package employee.pojo;
 
 public class Person implements IGeneral {
     private String name;

@@ -1,5 +1,8 @@
 package employee;
 
+import employee.pojo.Engineer;
+import employee.pojo.Worker;
+
 import java.util.Scanner;
 
 public class Manage {
