@@ -1,6 +1,5 @@
 package employee.service;
 
-
 import employee.Manage;
 import employee.pojo.Engineer;
 
@@ -9,8 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class EngineerServiceImpl implements BaseService<Engineer>   {
-
+public class EngineerServiceImpl implements BaseService<Engineer> {
 
 
     Scanner sc = new Scanner(System.in);
@@ -31,10 +29,10 @@ public class EngineerServiceImpl implements BaseService<Engineer>   {
         return file.exists();
     }
 
-    private void addToF(Engineer en)  {
+    private void addToF(Engineer en) {
         FileWriter myList = null;
         try {
-            if(checkFileExist()) {
+            if (checkFileExist()) {
                 myList = new FileWriter(Manage.FILE_PATH, true);
                 myList.write(en.toString() + "\n");
             } else {
@@ -46,6 +44,7 @@ public class EngineerServiceImpl implements BaseService<Engineer>   {
             System.out.println(e.getMessage());
         }
     }
+
     public int inputId() {
         System.out.print("Input the id: ");
         while (true) {
@@ -57,6 +56,7 @@ public class EngineerServiceImpl implements BaseService<Engineer>   {
             }
         }
     }
+
     public String inputName() {
         System.out.print("Input the name: ");
         return sc.nextLine();

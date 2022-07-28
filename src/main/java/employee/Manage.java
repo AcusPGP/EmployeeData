@@ -18,6 +18,7 @@ public class Manage {
         switch (option) {
             case "1":
                 BaseService worker = new WorkerServiceImpl();
+                worker.add();
                 break;
             case "2":
                 BaseService engineer  = new EngineerServiceImpl();
