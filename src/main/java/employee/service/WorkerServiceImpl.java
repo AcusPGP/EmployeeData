@@ -47,7 +47,7 @@ public class WorkerServiceImpl implements BaseService<Worker> {
     public int inputId() {
         System.out.print("Input the id: ");
         try {
-            int id = Integer.parseInt(sc.nextLine());
+            int id = Integer.parseInt(sc.nextLine().trim());
             return id;
         } catch (NumberFormatException e) {
             System.out.println("Invalid! Please input the id again. ");
