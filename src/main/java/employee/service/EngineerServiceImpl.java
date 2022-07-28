@@ -15,6 +15,7 @@ public class EngineerServiceImpl implements BaseService<Engineer> {
 
     @Override
     public void add() {
+        System.out.println(" ");
         int id = inputId();
         String name = inputName();
         int age = inputAge();
@@ -47,15 +48,15 @@ public class EngineerServiceImpl implements BaseService<Engineer> {
 
     public int inputId() {
         System.out.print("Input the id: ");
-        while (true) {
-            try {
-                int id = Integer.parseInt(sc.nextLine());
-                return id;
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid! Please input the id again. ");
-            }
+        try {
+            int id = Integer.parseInt(sc.nextLine().trim());
+            return id;
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid! Please input the id again. ");
+            return inputId();
         }
     }
+
 
     public String inputName() {
         System.out.print("Input the name: ");
@@ -64,13 +65,17 @@ public class EngineerServiceImpl implements BaseService<Engineer> {
 
     public int inputAge() {
         System.out.print("Input the age: ");
-        while (true) {
-            try {
-                int age = Integer.parseInt(sc.nextLine());
+        try {
+            int age = Integer.parseInt(sc.nextLine().trim());
+            if (age >= 1 && age <= 100) {
                 return age;
-            } catch (NumberFormatException e) {
+            } else {
                 System.out.println("Invalid! Please input the age again. ");
+                return inputAge();
             }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid! Please input the age again. ");
+            return inputAge();
         }
     }
 
