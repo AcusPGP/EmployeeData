@@ -18,6 +18,7 @@ public class WorkerServiceImpl implements BaseService<Worker> {
         String name = inputName();
         int age = inputAge();
         String address = inputAddress();
+        System.out.println(" ");
         String type = "worker";
         Worker wo = new Worker(id, name, age, address, type);
         addToF(wo);

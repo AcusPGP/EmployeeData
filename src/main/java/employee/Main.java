@@ -1,25 +1,27 @@
 package employee;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         getInput();
     }
 
-    public static void getInput() {
+    public static void getInput() throws Exception {
         Scanner sc = new Scanner(System.in);
         String input;
         boolean exit = false;
         Manage employee = new Manage();
         showMenu();
         while (true) {
-            input = sc.nextLine();
+            input = sc.nextLine().trim();
             switch (input) {
                 case "1":
                     employee.add();
                     break;
                 case "2":
+                    employee.show();
                     break;
                 case "3":
                     break;

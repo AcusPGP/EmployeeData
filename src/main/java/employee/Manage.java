@@ -4,6 +4,7 @@ import employee.service.BaseService;
 import employee.service.EngineerServiceImpl;
 import employee.service.WorkerServiceImpl;
 
+import java.io.File;
 import java.util.Scanner;
 
 public class Manage {
@@ -14,7 +15,7 @@ public class Manage {
 
     public void add() {
         showOption();
-        String option = sc.nextLine();
+        String option = sc.nextLine().trim();
         switch (option) {
             case "1":
                 BaseService worker = new WorkerServiceImpl();
@@ -28,6 +29,16 @@ public class Manage {
                 System.out.println(" ");
                 System.out.println("Invalid! Please choose an option in the below menu: ");
         }
+    }
+
+    public void show() throws Exception {
+        System.out.println(" ");
+        File file = new File("/Users/macbook/OOPProjects/Employee_Data/list.txt");
+        Scanner read = new Scanner(file);
+        while (read.hasNextLine()) {
+            System.out.println(read.nextLine());
+        }
+        System.out.println(" ");
     }
 
     static void showOption() {

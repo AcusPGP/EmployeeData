@@ -20,6 +20,7 @@ public class EngineerServiceImpl implements BaseService<Engineer> {
         String name = inputName();
         int age = inputAge();
         String address = inputAddress();
+        System.out.println(" ");
         String type = "engineer";
         Engineer en = new Engineer(id, name, age, address, type);
         addToF(en);
