@@ -4,7 +4,8 @@ import employee.service.BaseService;
 import employee.service.EngineerServiceImpl;
 import employee.service.WorkerServiceImpl;
 
-import java.io.File;
+import javax.swing.*;
+import java.io.*;
 import java.util.Scanner;
 
 public class Manage {
@@ -14,7 +15,7 @@ public class Manage {
     Scanner sc = new Scanner(System.in);
 
     public void add() {
-        showOption();
+        showOptionAdd();
         String option = sc.nextLine().trim();
         switch (option) {
             case "1":
@@ -22,7 +23,7 @@ public class Manage {
                 worker.add();
                 break;
             case "2":
-                BaseService engineer  = new EngineerServiceImpl();
+                BaseService engineer = new EngineerServiceImpl();
                 engineer.add();
                 break;
             default:
@@ -41,7 +42,47 @@ public class Manage {
         System.out.println(" ");
     }
 
-    static void showOption() {
+    private static Scanner x;
+
+    public void delete(int id) {
+        String tempFile = "temp.txt";
+        File oldFile = new File("/Users/macbook/OOPProjects/Employee_Data/list.txt");
+        File newFile = new File(tempFile);
+        String ID;
+        String name;
+        String age;
+        String address;
+        String type;
+        try {
+            FileWriter fw = new FileWriter(tempFile, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            x = new Scanner(new File("/Users/macbook/OOPProjects/Employee_Data/list.txt"));
+            x.useDelimiter("[,]");
+
+            while (x.hasNext()) {
+                ID = x.next();
+                name = x.next();
+                age = x.next();
+                address = x.next();
+                type = x.next();
+                if (!ID.equals(id)) {
+                    pw.println(ID + " " + name + " " + age + " " + address + " " + type);
+                }
+            }
+            x.close();
+            pw.flush();
+            pw.close();
+            oldFile.delete();
+            File list = new File("/Users/macbook/OOPProjects/Employee_Data/list.txt");
+            newFile.renameTo(list);
+
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error");
+        }
+    }
+
+    static void showOptionAdd() {
         System.out.println(" ");
         System.out.println("------Job Position------");
         System.out.println("1. Worker.");
