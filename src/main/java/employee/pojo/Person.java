@@ -67,7 +67,7 @@ public class Person implements IGeneral {
     }
 
     public String toString() {
-        return id + "," + name + "," + age + "," + address + "," + type;
+        return id + "@" + name + "@" + age + "@" + address + "@" + type;
     }
 }
 

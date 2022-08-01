@@ -1,6 +1,5 @@
 package employee;
 
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Main {
@@ -11,7 +10,6 @@ public class Main {
     public static void getInput() throws Exception {
         Scanner sc = new Scanner(System.in);
         String input;
-        String filePath = "temp.txt";
         boolean exit = false;
         Manage employee = new Manage();
         showMenu();
@@ -29,7 +27,7 @@ public class Main {
                 case "4":
                     employee.show();
                     System.out.print("Please choose an Id to delete: ");
-                    int id = Integer.parseInt(sc.nextLine().trim());
+                    String id = sc.nextLine().trim();
                     employee.delete(id);
                     break;
                 case "5":

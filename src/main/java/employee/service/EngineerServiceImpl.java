@@ -3,9 +3,7 @@ package employee.service;
 import employee.Manage;
 import employee.pojo.Engineer;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 public class EngineerServiceImpl implements BaseService<Engineer> {
@@ -51,13 +49,27 @@ public class EngineerServiceImpl implements BaseService<Engineer> {
         System.out.print("Input the id: ");
         try {
             int id = Integer.parseInt(sc.nextLine().trim());
+            checkId(id);
             return id;
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | IOException e) {
             System.out.println("Invalid! Please input the id again. ");
             return inputId();
         }
     }
 
+    public void checkId(int id) throws IOException {
+        File check = new File("/Users/macbook/OOPProjects/Employee_Data/list.txt");
+        BufferedReader reader = new BufferedReader(new FileReader(check));
+        String currentLine;
+        while ((currentLine = reader.readLine()) != null) {
+            String trimmedLine = currentLine.trim();
+            String[] array = trimmedLine.split("@");
+            if (array[0].equals(id)) {
+                System.out.println("This ID " + "'" + id + "'" + " is aLready had. Please try another id." + "\n");
+                inputId();
+            }
+        }
+    }
 
     public String inputName() {
         System.out.print("Input the name: ");
