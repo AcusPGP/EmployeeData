@@ -5,7 +5,6 @@ import employee.service.EngineerServiceImpl;
 import employee.service.WorkerServiceImpl;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Manage {
@@ -40,6 +39,9 @@ public class Manage {
             System.out.println(read.nextLine());
         }
         System.out.println(" ");
+    }
+
+    public void edit() {
     }
 
     public void delete(String id) throws IOException {
