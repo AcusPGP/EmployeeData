@@ -12,7 +12,7 @@ public class EngineerServiceImpl implements BaseService<Engineer> {
     Scanner sc = new Scanner(System.in);
 
     @Override
-    public void add() {
+    public void add()  {
         System.out.println(" ");
         int id = inputId();
         String name = inputName();
@@ -48,16 +48,16 @@ public class EngineerServiceImpl implements BaseService<Engineer> {
     public int inputId() {
         System.out.print("Input the id: ");
         try {
-            int id = Integer.parseInt(sc.nextLine().trim());
+            String id = sc.nextLine().trim();
             checkId(id);
-            return id;
+            return Integer.parseInt(id);
         } catch (NumberFormatException | IOException e) {
             System.out.println("Invalid! Please input the id again. ");
             return inputId();
         }
     }
 
-    public void checkId(int id) throws IOException {
+    public void checkId(String id) throws IOException {
         File check = new File("/Users/macbook/OOPProjects/Employee_Data/list.txt");
         BufferedReader reader = new BufferedReader(new FileReader(check));
         String currentLine;
@@ -66,9 +66,11 @@ public class EngineerServiceImpl implements BaseService<Engineer> {
             String[] array = trimmedLine.split("@");
             if (array[0].equals(id)) {
                 System.out.println("This ID " + "'" + id + "'" + " is aLready had. Please try another id." + "\n");
+                reader.close();
                 inputId();
             }
         }
+        reader.close();
     }
 
     public String inputName() {

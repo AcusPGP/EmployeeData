@@ -3,9 +3,7 @@ package employee.service;
 import employee.Manage;
 import employee.pojo.Worker;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 public class WorkerServiceImpl implements BaseService<Worker> {
@@ -48,12 +46,29 @@ public class WorkerServiceImpl implements BaseService<Worker> {
     public int inputId() {
         System.out.print("Input the id: ");
         try {
-            int id = Integer.parseInt(sc.nextLine().trim());
-            return id;
-        } catch (NumberFormatException e) {
+            String id = sc.nextLine().trim();
+            checkId(id);
+            return Integer.parseInt(id);
+        } catch (NumberFormatException | IOException e) {
             System.out.println("Invalid! Please input the id again. ");
             return inputId();
         }
+    }
+
+    public void checkId(String id) throws IOException {
+        File check = new File("/Users/macbook/OOPProjects/Employee_Data/list.txt");
+        BufferedReader reader = new BufferedReader(new FileReader(check));
+        String currentLine;
+        while ((currentLine = reader.readLine()) != null) {
+            String trimmedLine = currentLine.trim();
+            String[] array = trimmedLine.split("@");
+            if (array[0].equals(id)) {
+                System.out.println("This ID " + "'" + id + "'" + " is aLready had. Please try another id." + "\n");
+                reader.close();
+                inputId();
+            }
+        }
+        reader.close();
     }
 
 
