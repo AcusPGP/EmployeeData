@@ -17,16 +17,15 @@ public class Manage {
         showOptionAdd();
         String option = sc.nextLine().trim();
         switch (option) {
-            case "1":
+            case "1" -> {
                 BaseService worker = new WorkerServiceImpl();
                 worker.add();
-                break;
-            case "2":
+            }
+            case "2" -> {
                 BaseService engineer = new EngineerServiceImpl();
                 engineer.add();
-                break;
-            default:
-                System.out.println("\n" + "Invalid! Please choose an option in the below menu. ");
+            }
+            default -> System.out.println("\n" + "Invalid! Please choose an option in the below menu. ");
         }
     }
 
@@ -54,7 +53,7 @@ public class Manage {
                 String nAME, aDDRESS, tYPE;
                 int iD, aGE;
                 switch (option) {
-                    case "1":
+                    case "1" -> {
                         System.out.println("The current name is " + array[1]);
                         iD = Integer.parseInt(array[0]);
                         aGE = Integer.parseInt(array[2]);
@@ -64,8 +63,8 @@ public class Manage {
                         nAME = sc.nextLine().trim();
                         writer.write(iD + "@" + nAME + "@" + aGE + "@" + aDDRESS + "@" + tYPE);
                         writer.close();
-                        break;
-                    case "2":
+                    }
+                    case "2" -> {
                         System.out.println("The current age is " + array[2]);
                         iD = Integer.parseInt(array[0]);
                         nAME = array[1];
@@ -75,8 +74,8 @@ public class Manage {
                         aGE = Integer.parseInt(sc.nextLine().trim());
                         writer.write(iD + "@" + nAME + "@" + aGE + "@" + aDDRESS + "@" + tYPE);
                         writer.close();
-                        break;
-                    case "3":
+                    }
+                    case "3" -> {
                         System.out.println("The current address is " + array[3]);
                         iD = Integer.parseInt(array[0]);
                         nAME = array[1];
@@ -86,8 +85,8 @@ public class Manage {
                         aDDRESS = sc.nextLine();
                         writer.write(iD + "@" + nAME + "@" + aGE + "@" + aDDRESS + "@" + tYPE);
                         writer.close();
-                        break;
-                    case "4":
+                    }
+                    case "4" -> {
                         System.out.println("The current type is " + array[4]);
                         iD = Integer.parseInt(array[0]);
                         nAME = array[1];
@@ -97,9 +96,8 @@ public class Manage {
                         tYPE = sc.nextLine();
                         writer.write(iD + "@" + nAME + "@" + aGE + "@" + aDDRESS + "@" + tYPE);
                         writer.close();
-                        break;
-                    default:
-                        System.out.println("\n" + "Invalid! Please choose an option in the below menu: ");
+                    }
+                    default -> System.out.println("\n" + "Invalid! Please choose an option in the below menu: ");
                 }
             } else {
                 writer.write(curentLine + System.getProperty("line.separator"));
