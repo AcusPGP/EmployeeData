@@ -12,7 +12,7 @@ public class EngineerServiceImpl implements BaseService<Engineer> {
     Scanner sc = new Scanner(System.in);
 
     @Override
-    public void add()  {
+    public void add() {
         System.out.println(" ");
         int id = inputId();
         String name = inputName();
@@ -63,7 +63,7 @@ public class EngineerServiceImpl implements BaseService<Engineer> {
 
     public int checkId(String id) throws IOException {
         int result = 0;
-        File check = new File("/Users/macbook/Desktop/ComputerScience/Projects/OOPProjects/Employee_Data/list.txt");
+        File check = new File("/Users/macbook/OOPProjects/Employee_Data/list.txt");
         BufferedReader reader = new BufferedReader(new FileReader(check));
         String currentLine;
         while ((currentLine = reader.readLine()) != null) {

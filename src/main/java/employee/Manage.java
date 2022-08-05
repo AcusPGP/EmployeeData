@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Manage {
 
-    public static final String FILE_PATH = "/Users/macbook/Desktop/ComputerScience/Projects/OOPProjects/Employee_Data/list.txt";
+    public static final String FILE_PATH = "/Users/macbook/OOPProjects/Employee_Data/list.txt";
 
     Scanner sc = new Scanner(System.in);
 
@@ -31,7 +31,7 @@ public class Manage {
 
     public void show() throws Exception {
         System.out.println(" ");
-        File file = new File("/Users/macbook/Desktop/ComputerScience/Projects/OOPProjects/Employee_Data/list.txt");
+        File file = new File("/Users/macbook/OOPProjects/Employee_Data/list.txt");
         Scanner read = new Scanner(file);
         while (read.hasNextLine()) {
             System.out.println(read.nextLine());
@@ -40,8 +40,8 @@ public class Manage {
     }
 
     public void edit(String id) throws IOException {
-        File file = new File("/Users/macbook/Desktop/ComputerScience/Projects/OOPProjects/Employee_Data/list.txt");
-        File temp = new File("/Users/macbook/Desktop/ComputerScience/Projects/OOPProjects/Employee_Data/temp.txt");
+        File file = new File("/Users/macbook/OOPProjects/Employee_Data/list.txt");
+        File temp = new File("/Users/macbook/OOPProjects/Employee_Data/temp.txt");
         BufferedReader reader = new BufferedReader(new FileReader(file));
         BufferedWriter writer = new BufferedWriter(new FileWriter(temp));
         String curentLine;
@@ -110,8 +110,8 @@ public class Manage {
     }
 
     public void delete(String id) throws IOException {
-        File inputF = new File("/Users/macbook/Desktop/ComputerScience/Projects/OOPProjects/Employee_Data/list.txt");
-        File tempF = new File("/Users/macbook/Desktop/ComputerScience/Projects/OOPProjects/Employee_Data/temp.txt");
+        File inputF = new File("/Users/macbook/OOPProjects/Employee_Data/list.txt");
+        File tempF = new File("/Users/macbook/OOPProjects/Employee_Data/temp.txt");
         BufferedReader reader = new BufferedReader(new FileReader(inputF));
         BufferedWriter writer = new BufferedWriter(new FileWriter(tempF));
         String currentLine;
