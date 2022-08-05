@@ -26,8 +26,7 @@ public class Manage {
                 engineer.add();
                 break;
             default:
-                System.out.println(" ");
-                System.out.println("Invalid! Please choose an option in the below menu: ");
+                System.out.println("\n" + "Invalid! Please choose an option in the below menu. ");
         }
     }
 
@@ -38,10 +37,78 @@ public class Manage {
         while (read.hasNextLine()) {
             System.out.println(read.nextLine());
         }
-        System.out.println(" ");
+        System.out.println("\n");
     }
 
-    public void edit() {
+    public void edit(String id) throws IOException {
+        File file = new File("/Users/macbook/OOPProjects/Employee_Data/list.txt");
+        File temp = new File("/Users/macbook/OOPProjects/Employee_Data/temp.txt");
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(temp));
+        String curentLine;
+        while ((curentLine = reader.readLine()) != null) {
+            String[] array = curentLine.split("@");
+            if (array[0].equals(id)) {
+                showOptionEdit();
+                String option = sc.nextLine().trim();
+                String nAME, aDDRESS, tYPE;
+                int iD, aGE;
+                switch (option) {
+                    case "1":
+                        System.out.println("The current name is " + array[1]);
+                        iD = Integer.parseInt(array[0]);
+                        aGE = Integer.parseInt(array[2]);
+                        aDDRESS = array[3];
+                        tYPE = array[4];
+                        System.out.print("Input a new name: ");
+                        nAME = sc.nextLine().trim();
+                        writer.write(iD + "@" + nAME + "@" + aGE + "@" + aDDRESS + "@" + tYPE);
+                        writer.close();
+                        break;
+                    case "2":
+                        System.out.println("The current age is " + array[2]);
+                        iD = Integer.parseInt(array[0]);
+                        nAME = array[1];
+                        aDDRESS = array[3];
+                        tYPE = array[4];
+                        System.out.print("Input a new age: ");
+                        aGE = Integer.parseInt(sc.nextLine().trim());
+                        writer.write(iD + "@" + nAME + "@" + aGE + "@" + aDDRESS + "@" + tYPE);
+                        writer.close();
+                        break;
+                    case "3":
+                        System.out.println("The current address is " + array[3]);
+                        iD = Integer.parseInt(array[0]);
+                        nAME = array[1];
+                        aGE = Integer.parseInt(array[2]);
+                        tYPE = array[4];
+                        System.out.print("Input a new address: ");
+                        aDDRESS = sc.nextLine();
+                        writer.write(iD + "@" + nAME + "@" + aGE + "@" + aDDRESS + "@" + tYPE);
+                        writer.close();
+                        break;
+                    case "4":
+                        System.out.println("The current type is " + array[4]);
+                        iD = Integer.parseInt(array[0]);
+                        nAME = array[1];
+                        aGE = Integer.parseInt(array[2]);
+                        aDDRESS = array[3];
+                        System.out.print("Input a new type: ");
+                        tYPE = sc.nextLine();
+                        writer.write(iD + "@" + nAME + "@" + aGE + "@" + aDDRESS + "@" + tYPE);
+                        writer.close();
+                        break;
+                    default:
+                        System.out.println("\n" + "Invalid! Please choose an option in the below menu: ");
+                }
+            } else {
+                writer.write(curentLine + System.getProperty("line.separator"));
+            }
+        }
+        writer.close();
+        reader.close();
+        temp.renameTo(file);
+        System.out.println("Change successful!" + "\n");
     }
 
     public void delete(String id) throws IOException {
@@ -70,5 +137,15 @@ public class Manage {
         System.out.println("------------------------");
         System.out.print("Please choose an option: ");
     }
+
+    static void showOptionEdit() {
+        System.out.println(" ");
+        System.out.println("1. Change the name.");
+        System.out.println("2. Change the age.");
+        System.out.println("3. Change the address.");
+        System.out.println("4. Change the type employee.");
+        System.out.print("Please choose an option: ");
+    }
+
 }
 

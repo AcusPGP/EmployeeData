@@ -99,6 +99,9 @@ public class EngineerServiceImpl implements BaseService<Engineer> {
         return sc.nextLine();
     }
 
+    public void edit() {
+
+    }
 
     @Override
     public void delete(Engineer object) {

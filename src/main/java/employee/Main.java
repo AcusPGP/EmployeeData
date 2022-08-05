@@ -9,7 +9,7 @@ public class Main {
 
     public static void getInput() throws Exception {
         Scanner sc = new Scanner(System.in);
-        String input;
+        String input, id;
         boolean exit = false;
         Manage employee = new Manage();
         showMenu();
@@ -23,11 +23,15 @@ public class Main {
                     employee.show();
                     break;
                 case "3":
+                    employee.show();
+                    System.out.print("Please choose an Id to edit: ");
+                    id = sc.nextLine().trim();
+                    employee.edit(id);
                     break;
                 case "4":
                     employee.show();
                     System.out.print("Please choose an Id to delete: ");
-                    String id = sc.nextLine().trim();
+                    id = sc.nextLine().trim();
                     employee.delete(id);
                     break;
                 case "5":

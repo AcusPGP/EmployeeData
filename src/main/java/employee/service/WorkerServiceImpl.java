@@ -44,18 +44,23 @@ public class WorkerServiceImpl implements BaseService<Worker> {
     }
 
     public int inputId() {
-        System.out.print("Input the id: ");
-        try {
-            String id = sc.nextLine().trim();
-            checkId(id);
-            return Integer.parseInt(id);
-        } catch (NumberFormatException | IOException e) {
-            System.out.println("Invalid! Please input the id again. ");
-            return inputId();
+        while (true) {
+            System.out.print("Input the id: ");
+            try {
+                String id = sc.nextLine().trim();
+                int result = checkId(id);
+                if (result == 0) {
+                    return Integer.parseInt(id);
+                }
+            } catch (NumberFormatException | IOException e) {
+                System.out.println("Invalid! Please input the id again. ");
+                return inputId();
+            }
         }
     }
 
-    public void checkId(String id) throws IOException {
+    public int checkId(String id) throws IOException {
+        int result = 0;
         File check = new File("/Users/macbook/OOPProjects/Employee_Data/list.txt");
         BufferedReader reader = new BufferedReader(new FileReader(check));
         String currentLine;
@@ -63,12 +68,13 @@ public class WorkerServiceImpl implements BaseService<Worker> {
             String trimmedLine = currentLine.trim();
             String[] array = trimmedLine.split("@");
             if (array[0].equals(id)) {
+                result = -1;
                 System.out.println("This ID " + "'" + id + "'" + " is aLready had. Please try another id." + "\n");
-                reader.close();
-                inputId();
+                break;
             }
         }
         reader.close();
+        return result;
     }
 
 
@@ -103,4 +109,5 @@ public class WorkerServiceImpl implements BaseService<Worker> {
     public void delete(Worker object) {
 
     }
+
 }
