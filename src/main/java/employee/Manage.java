@@ -1,8 +1,8 @@
 package employee;
 
 import employee.service.BaseService;
-import employee.service.EngineerServiceImpl;
-import employee.service.WorkerServiceImpl;
+import employee.service.engineer.EngineerServiceImpl;
+import employee.service.worker.WorkerServiceImpl;
 
 import java.io.*;
 import java.util.Scanner;

@@ -8,4 +8,6 @@ public interface BaseService<T extends Person> {
 
     void delete(T object);
 
+    void edit() ;
+
 }
