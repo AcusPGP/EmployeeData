@@ -1,7 +1,9 @@
 package employee.service.engineer;
 
 
-public interface EngineerService{
+import employee.pojo.Engineer;
 
+public interface EngineerService<T extends Engineer>{
 
+    void delete(T engineer);
 }

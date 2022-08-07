@@ -9,7 +9,7 @@ import employee.service.BaseService;
 import java.io.*;
 import java.util.Scanner;
 
-public class EngineerServiceImpl extends BaseEmployeeServiceImpl {
+public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements EngineerService {
 
 
     Scanner sc = new Scanner(System.in);
@@ -112,4 +112,8 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl {
 
     }
 
+    @Override
+    public void delete(Engineer engineer) {
+        
+    }
 }

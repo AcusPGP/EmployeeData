@@ -11,7 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class WorkerServiceImpl extends BaseEmployeeServiceImpl {
+public class WorkerServiceImpl extends BaseEmployeeServiceImpl implements WorkerService<Worker> {
     Scanner sc = new Scanner(System.in);
 
     @Override
@@ -110,4 +110,8 @@ public class WorkerServiceImpl extends BaseEmployeeServiceImpl {
         return sc.nextLine();
     }
 
+    @Override
+    public void delete(Worker worker) {
+
+    }
 }

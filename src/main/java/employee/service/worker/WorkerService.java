@@ -1,4 +1,8 @@
 package employee.service.worker;
 
-public interface WorkerService {
+import employee.pojo.Worker;
+
+public interface WorkerService<T extends Worker> {
+
+    void delete(T worker);
 }
