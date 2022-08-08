@@ -1,5 +1,7 @@
 package employee;
 
+import employee.util.EmployeeConstants;
+
 import java.util.Scanner;
 
 public class Main {
@@ -24,18 +26,18 @@ public class Main {
                     break;
                 case "3":
                     employee.show();
-                    System.out.print("Please choose an Id to edit: ");
+                    System.out.print(EmployeeConstants.MSG_EDIT_ID);
                     id = sc.nextLine().trim();
                     employee.edit(id);
                     break;
                 case "4":
                     employee.show();
-                    System.out.print("Please choose an Id to delete: ");
+                    System.out.print(EmployeeConstants.MSG_DEL_ID);
                     id = sc.nextLine().trim();
                     employee.delete(id);
                     break;
                 case "5":
-                    System.out.println("EXIT THE PROGRAM");
+                    System.out.println(EmployeeConstants.MSG_EXIT_PROGRAM);
                     exit = true;
                     break;
                 default:
