@@ -8,15 +8,15 @@ public class Person implements IGeneral {
 
     private String type;
 
-    public Person() {
-    }
+    private String level;
 
-    public Person(int id, String name, int age, String address, String type) {
+    public Person(int id, String name, int age, String address, String type, String level) {
         this.name = name;
         this.age = age;
         this.address = address;
         this.id = id;
         this.type = type;
+        this.level = level;
     }
 
     @Override
@@ -66,8 +66,12 @@ public class Person implements IGeneral {
         return type;
     }
 
+    public void setLevel(String level) {this.level = level;}
+
+    public String getLevel() {return level;}
+
     public String toString() {
-        return id + "@" + name + "@" + age + "@" + address + "@" + type;
+        return id + "@" + name + "@" + age + "@" + address + "@" + type + "@" + level  ;
     }
 }
 

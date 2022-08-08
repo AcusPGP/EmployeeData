@@ -12,21 +12,35 @@ public class WorkerServiceImpl extends BaseEmployeeServiceImpl implements Worker
 
     @Override
     public void add() {
-        System.out.println(" ");
+        System.out.println("\n");
         int id = inputId();
         String name = inputName();
         int age = inputAge();
         String address = inputAddress();
-        System.out.println(" ");
+        String level = chooseLevel();
+        System.out.println("\n");
         String type = "worker";
-        Worker worker = new Worker(id, name, age, address, type);
+        Worker worker = new Worker(id, name, age, address, type, level);
         addToF(worker);
     }
 
     @Override
-    public void showLevel(Worker worker) {
-
+    public void show() throws IOException {
+        System.out.println("\n");
+        File file = new File("/Users/macbook/OOPProjects/Employee_Data/list.txt");
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        String currentLine;
+        while ((currentLine = reader.readLine()) != null) {
+            String[] array = currentLine.split("@");
+            if (array[4].equals("worker")) {
+                System.out.println(currentLine + "\n");
+            } else {
+                continue;
+            }
+        }
+        reader.close();
     }
+
 
     private boolean checkFileExist() {
         File file = new File(Manage.FILE_PATH);
@@ -111,4 +125,24 @@ public class WorkerServiceImpl extends BaseEmployeeServiceImpl implements Worker
         return sc.nextLine();
     }
 
+    public String chooseLevel() {
+        System.out.println("Choose level for the worker.");
+        System.out.println("1. Employee");
+        System.out.println("2. Manager");
+        System.out.print("Please choose an option: ");
+        String option = sc.nextLine().trim();
+        String level = null;
+        switch (option) {
+            case "1" -> {
+                level = "employee";
+                break;
+            }
+            case "2" -> {
+                level = "engineer";
+                break;
+            }
+            default -> System.out.println("\n" + "Invalid! Please choose an option in the below menu. ");
+        }
+        return level;
+    }
 }

@@ -20,7 +20,7 @@ public abstract class BaseEmployeeServiceImpl implements BaseService {
             if (array[0].equals(id)) {
                 showEditFunctions();
                 String option = sc.nextLine().trim();
-                String nAME, aDDRESS, tYPE;
+                String nAME, aDDRESS, tYPE, ld;
                 int iD, aGE;
                 switch (option) {
                     case "1" -> {
@@ -29,9 +29,10 @@ public abstract class BaseEmployeeServiceImpl implements BaseService {
                         aGE = Integer.parseInt(array[2]);
                         aDDRESS = array[3];
                         tYPE = array[4];
+                        ld = array[5];
                         System.out.print("Input a new name: ");
                         nAME = sc.nextLine().trim();
-                        writer.write(iD + "@" + nAME + "@" + aGE + "@" + aDDRESS + "@" + tYPE);
+                        writer.write(iD + "@" + nAME + "@" + aGE + "@" + aDDRESS + "@" + tYPE + "@" + ld);
                         writer.close();
                     }
                     case "2" -> {
@@ -40,9 +41,10 @@ public abstract class BaseEmployeeServiceImpl implements BaseService {
                         nAME = array[1];
                         aDDRESS = array[3];
                         tYPE = array[4];
+                        ld = array[5];
                         System.out.print("Input a new age: ");
                         aGE = Integer.parseInt(sc.nextLine().trim());
-                        writer.write(iD + "@" + nAME + "@" + aGE + "@" + aDDRESS + "@" + tYPE);
+                        writer.write(iD + "@" + nAME + "@" + aGE + "@" + aDDRESS + "@" + tYPE + "@" + ld);
                         writer.close();
                     }
                     case "3" -> {
@@ -51,9 +53,10 @@ public abstract class BaseEmployeeServiceImpl implements BaseService {
                         nAME = array[1];
                         aGE = Integer.parseInt(array[2]);
                         tYPE = array[4];
+                        ld = array[5];
                         System.out.print("Input a new address: ");
                         aDDRESS = sc.nextLine();
-                        writer.write(iD + "@" + nAME + "@" + aGE + "@" + aDDRESS + "@" + tYPE);
+                        writer.write(iD + "@" + nAME + "@" + aGE + "@" + aDDRESS + "@" + tYPE + "@" + ld);
                         writer.close();
                     }
                     case "4" -> {
@@ -64,7 +67,12 @@ public abstract class BaseEmployeeServiceImpl implements BaseService {
                         aDDRESS = array[3];
                         System.out.print("Input a new type: ");
                         tYPE = sc.nextLine();
-                        writer.write(iD + "@" + nAME + "@" + aGE + "@" + aDDRESS + "@" + tYPE);
+                        if (tYPE.equals("worker")) {
+                            ld = showWorkerLevel();
+                        } else {
+                            ld = showEngineerDegree();
+                        }
+                        writer.write(iD + "@" + nAME + "@" + aGE + "@" + aDDRESS + "@" + tYPE + "@" + ld);
                         writer.close();
                     }
                     default -> System.out.println("\n" + "Invalid! Please choose an option in the below menu: ");
@@ -107,5 +115,52 @@ public abstract class BaseEmployeeServiceImpl implements BaseService {
         System.out.println("3. Change the address.");
         System.out.println("4. Change the type employee.");
         System.out.print("Please choose an option: ");
+    }
+
+    public String showWorkerLevel() {
+        System.out.println("Choose level for the worker.");
+        System.out.println("1. Employee");
+        System.out.println("2. Manager");
+        System.out.print("Please choose an option: ");
+        String option = sc.nextLine().trim();
+        String level = null;
+        switch (option) {
+            case "1" -> {
+                level = "employee";
+                break;
+            }
+            case "2" -> {
+                level = "engineer";
+                break;
+            }
+            default -> System.out.println("\n" + "Invalid! Please choose an option in the below menu. ");
+        }
+        return level;
+    }
+
+    public String showEngineerDegree() {
+        System.out.println("Choose degree for the engineer.");
+        System.out.println("1. Front-end");
+        System.out.println("2. Back-end");
+        System.out.println("3. Full-stack");
+        System.out.print("Please choose an option: ");
+        String option = sc.nextLine().trim();
+        String degree = null;
+        switch (option) {
+            case "1" -> {
+                degree = "front-end";
+                break;
+            }
+            case "2" -> {
+                degree = "back-end";
+                break;
+            }
+            case "3" -> {
+                degree = "full-stack";
+                break;
+            }
+            default -> System.out.println("\n" + "Invalid! Please choose an option in the below menu. ");
+        }
+        return degree;
     }
 }

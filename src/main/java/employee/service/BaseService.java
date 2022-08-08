@@ -9,6 +9,8 @@ public interface BaseService<T extends Person> {
 
     void add();
 
+    void show() throws IOException;
+
     void delete() throws IOException;
 
     void edit() throws IOException;

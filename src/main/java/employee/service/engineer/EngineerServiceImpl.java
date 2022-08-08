@@ -18,15 +18,28 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
         String name = inputName();
         int age = inputAge();
         String address = inputAddress();
+        String degree = chooseDegree();
         System.out.println(" ");
         String type = "engineer";
-        Engineer en = new Engineer(id, name, age, address, type);
+        Engineer en = new Engineer(id, name, age, address, type, degree);
         addToF(en);
     }
 
     @Override
-    public void showDegree(Engineer engineer) {
-
+    public void show() throws IOException {
+        System.out.println("\n");
+        File file = new File("/Users/macbook/OOPProjects/Employee_Data/list.txt");
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        String currentLine;
+        while ((currentLine = reader.readLine()) != null) {
+            String[] array = currentLine.split("@");
+            if (array[4].equals("engineer")) {
+                System.out.println(currentLine + "\n");
+            } else {
+                continue;
+            }
+        }
+        reader.close();
     }
 
     private boolean checkFileExist() {
@@ -108,6 +121,32 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
     public String inputAddress() {
         System.out.print("Input the address: ");
         return sc.nextLine();
+    }
+
+    public String chooseDegree() {
+        System.out.println("Choose degree for the engineer.");
+        System.out.println("1. Front-end");
+        System.out.println("2. Back-end");
+        System.out.println("3. Full-stack");
+        System.out.print("Please choose an option: ");
+        String option = sc.nextLine().trim();
+        String degree = null;
+        switch (option) {
+            case "1" -> {
+                degree = "front-end";
+                break;
+            }
+            case "2" -> {
+                degree = "back-end";
+                break;
+            }
+            case "3" -> {
+                degree = "full-stack";
+                break;
+            }
+            default -> System.out.println("\n" + "Invalid! Please choose an option in the below menu. ");
+        }
+        return degree;
     }
 
 }

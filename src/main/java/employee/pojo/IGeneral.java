@@ -20,4 +20,8 @@ public interface IGeneral {
     public void setType(String type);
 
     public String getType();
+
+    public void setLevel(String level);
+
+    public String getLevel();
 }

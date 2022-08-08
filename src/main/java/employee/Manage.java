@@ -1,6 +1,5 @@
 package employee;
 
-import employee.pojo.Worker;
 import employee.service.BaseService;
 import employee.service.engineer.EngineerServiceImpl;
 import employee.service.worker.WorkerServiceImpl;
@@ -31,13 +30,30 @@ public class Manage {
     }
 
     public void show() throws Exception {
-        System.out.println(" ");
-        File file = new File("/Users/macbook/OOPProjects/Employee_Data/list.txt");
-        Scanner read = new Scanner(file);
-        while (read.hasNextLine()) {
-            System.out.println(read.nextLine());
+        showOptionShow();
+        String option = sc.nextLine().trim();
+        switch (option) {
+            case "1" -> {
+                BaseService worker = new WorkerServiceImpl();
+                worker.show();
+                break;
+            }
+            case "2" -> {
+                BaseService engineer = new EngineerServiceImpl();
+                engineer.show();
+                break;
+            }
+            case "3" -> {
+                File file = new File("/Users/macbook/OOPProjects/Employee_Data/list.txt");
+                Scanner read = new Scanner(file);
+                while (read.hasNextLine()) {
+                    System.out.println(read.nextLine());
+                }
+                System.out.println("\n");
+                read.close();
+                break;
+            }
         }
-        System.out.println("\n");
     }
 
     public void edit() throws IOException {
@@ -79,6 +95,14 @@ public class Manage {
         System.out.print("Please choose an option: ");
     }
 
+    static void showOptionShow() {
+        System.out.println("Show Options");
+        System.out.println("1. Show worker list");
+        System.out.println("2. Show engineer list");
+        System.out.println("3. Show full list");
+        System.out.print("Please choose an option: ");
+    }
+
     static void showOptionEdit() {
         System.out.println("Edit Options");
         System.out.println("1. Change the worker's info by id.");
@@ -94,4 +118,5 @@ public class Manage {
     }
 
 }
+
 
