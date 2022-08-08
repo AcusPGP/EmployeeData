@@ -2,7 +2,8 @@ package employee.service.worker;
 
 import employee.pojo.Worker;
 
+
 public interface WorkerService<T extends Worker> {
 
-    void delete(T worker);
+    void showLevel(T worker);
 }

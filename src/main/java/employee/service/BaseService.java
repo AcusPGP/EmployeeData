@@ -2,12 +2,15 @@ package employee.service;
 
 import employee.pojo.Person;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public interface BaseService<T extends Person> {
 
     void add();
 
-    void delete(T object);
+    void delete() throws IOException;
 
-    void edit() ;
+    void edit() throws IOException;
 
 }

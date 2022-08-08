@@ -24,15 +24,11 @@ public class Main {
                     break;
                 case "3":
                     employee.show();
-                    System.out.print("Please choose an Id to edit: ");
-                    id = sc.nextLine().trim();
-                    employee.edit(id);
+                    employee.edit();
                     break;
                 case "4":
                     employee.show();
-                    System.out.print("Please choose an Id to delete: ");
-                    id = sc.nextLine().trim();
-                    employee.delete(id);
+                    employee.delete();
                     break;
                 case "5":
                     System.out.println("EXIT THE PROGRAM");

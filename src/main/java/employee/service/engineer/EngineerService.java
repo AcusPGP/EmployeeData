@@ -5,5 +5,5 @@ import employee.pojo.Engineer;
 
 public interface EngineerService<T extends Engineer>{
 
-    void delete(T engineer);
+    void showDegree(T engineer);
 }

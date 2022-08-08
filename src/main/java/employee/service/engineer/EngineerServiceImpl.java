@@ -2,15 +2,12 @@ package employee.service.engineer;
 
 import employee.Manage;
 import employee.pojo.Engineer;
-import employee.pojo.Person;
 import employee.service.BaseEmployeeServiceImpl;
-import employee.service.BaseService;
 
 import java.io.*;
 import java.util.Scanner;
 
 public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements EngineerService {
-
 
     Scanner sc = new Scanner(System.in);
 
@@ -25,6 +22,11 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
         String type = "engineer";
         Engineer en = new Engineer(id, name, age, address, type);
         addToF(en);
+    }
+
+    @Override
+    public void showDegree(Engineer engineer) {
+
     }
 
     private boolean checkFileExist() {
@@ -108,12 +110,4 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
         return sc.nextLine();
     }
 
-    public void edit() {
-
-    }
-
-    @Override
-    public void delete(Engineer engineer) {
-        
-    }
 }

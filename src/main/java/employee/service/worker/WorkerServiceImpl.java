@@ -4,11 +4,7 @@ import employee.Manage;
 import employee.pojo.Worker;
 import employee.service.BaseEmployeeServiceImpl;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 public class WorkerServiceImpl extends BaseEmployeeServiceImpl implements WorkerService<Worker> {
@@ -23,8 +19,13 @@ public class WorkerServiceImpl extends BaseEmployeeServiceImpl implements Worker
         String address = inputAddress();
         System.out.println(" ");
         String type = "worker";
-        Worker wo = new Worker(id, name, age, address, type);
-        addToF(wo);
+        Worker worker = new Worker(id, name, age, address, type);
+        addToF(worker);
+    }
+
+    @Override
+    public void showLevel(Worker worker) {
+
     }
 
     private boolean checkFileExist() {
@@ -32,15 +33,15 @@ public class WorkerServiceImpl extends BaseEmployeeServiceImpl implements Worker
         return file.exists();
     }
 
-    private void addToF(Worker wo) {
+    private void addToF(Worker worker) {
         FileWriter myList = null;
         try {
             if (checkFileExist()) {
                 myList = new FileWriter(Manage.FILE_PATH, true);
-                myList.write(wo.toString() + "\n");
+                myList.write(worker.toString() + "\n");
             } else {
                 myList = new FileWriter(Manage.FILE_PATH);
-                myList.write(wo.toString() + "\n");
+                myList.write(worker.toString() + "\n");
             }
             myList.close();
         } catch (IOException e) {
@@ -110,8 +111,4 @@ public class WorkerServiceImpl extends BaseEmployeeServiceImpl implements Worker
         return sc.nextLine();
     }
 
-    @Override
-    public void delete(Worker worker) {
-
-    }
 }
