@@ -44,6 +44,7 @@ public class Manage {
                 break;
             }
             case "3" -> {
+                System.out.println("\n");
                 File file = new File("/Users/macbook/OOPProjects/Employee_Data/list.txt");
                 Scanner read = new Scanner(file);
                 while (read.hasNextLine()) {
