@@ -14,7 +14,7 @@ public class WorkerServiceImpl extends BaseEmployeeServiceImpl implements Worker
     Scanner sc = new Scanner(System.in);
 
     @Override
-    public void add() {
+    public void add() throws IOException {
         System.out.println();
         int id = inputId();
         String name = inputName();
@@ -39,8 +39,6 @@ public class WorkerServiceImpl extends BaseEmployeeServiceImpl implements Worker
             String[] array = currentLine.split("@");
             if (array[4].equals("worker")) {
                 System.out.println(currentLine + "\n");
-            } else {
-                continue;
             }
         }
         reader.close();
@@ -68,18 +66,26 @@ public class WorkerServiceImpl extends BaseEmployeeServiceImpl implements Worker
         }
     }
 
-    public int inputId() {
+    public int inputId() throws IOException {
         while (true) {
-            System.out.print("Input the id: ");
-            try {
-                String id = sc.nextLine().trim();
-                int result = checkId(id);
-                if (result == 0) {
-                    return Integer.parseInt(id);
+            int suggestId = suggestId();
+            System.out.println("Suggest ID: " + suggestId);
+            System.out.print("Please enter to get this ID or input a new ID: ");
+            String sgId = sc.nextLine().trim();
+            String empty = "";
+            if (sgId.equals(empty)) {
+                return suggestId;
+            } else {
+                try {
+                    String id = sgId;
+                    int result = checkId(id);
+                    if (result == 0) {
+                        return Integer.parseInt(id);
+                    }
+                } catch (NumberFormatException | IOException e) {
+                    System.out.println("Invalid! Please input the id again. ");
+                    return inputId();
                 }
-            } catch (NumberFormatException | IOException e) {
-                System.out.println("Invalid! Please input the id again. ");
-                return inputId();
             }
         }
     }
@@ -106,6 +112,26 @@ public class WorkerServiceImpl extends BaseEmployeeServiceImpl implements Worker
         }
     }
 
+    public int suggestId() throws IOException {
+        int num = 0;
+        File file = new File("/Users/macbook/OOPProjects/Employee_Data/list.txt");
+        String currentLine;
+        if (file.length() == 0) {
+            num = 1;
+        } else {
+            BufferedReader reader = new BufferedReader(new FileReader("/Users/macbook/OOPProjects/Employee_Data/list.txt"));
+            while ((currentLine = reader.readLine()) != null) {
+                String[] array = currentLine.split("@");
+                for (int i = 1; i > 0; i++) {
+                    if (i != Integer.parseInt(array[0])) {
+                        num = i;
+                        break;
+                    }
+                }
+            }
+        }
+        return num;
+    }
 
     public String inputName() {
         System.out.print("Input the name: ");
@@ -142,14 +168,8 @@ public class WorkerServiceImpl extends BaseEmployeeServiceImpl implements Worker
         String option = sc.nextLine().trim();
         String level = null;
         switch (option) {
-            case "1" -> {
-                level = "employee";
-                break;
-            }
-            case "2" -> {
-                level = "manager";
-                break;
-            }
+            case "1" -> level = "employee";
+            case "2" -> level = "manager";
             default -> System.out.println("\n" + "Invalid! Please choose an option in the below menu. ");
         }
         return level;

@@ -16,7 +16,7 @@ public class Manage {
 
     Scanner sc = new Scanner(System.in);
 
-    public void add() {
+    public void add() throws IOException {
         showOptionAdd();
         String option = sc.nextLine().trim();
         switch (option) {

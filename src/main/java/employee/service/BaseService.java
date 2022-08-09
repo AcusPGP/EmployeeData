@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public interface BaseService<T extends Person> {
 
-    void add();
+    void add() throws IOException;
 
     void show() throws IOException;
 

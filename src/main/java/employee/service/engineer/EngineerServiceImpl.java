@@ -15,7 +15,7 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
     Scanner sc = new Scanner(System.in);
 
     @Override
-    public void add() {
+    public void add() throws IOException {
         System.out.println(" ");
         int id = inputId();
         String name = inputName();
@@ -68,18 +68,26 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
         }
     }
 
-    public int inputId() {
+    public int inputId() throws IOException {
         while (true) {
-            System.out.print("Input the id: ");
-            try {
-                String id = sc.nextLine().trim();
-                int result = checkId(id);
-                if (result == 0) {
-                    return Integer.parseInt(id);
+            int suggestId = suggestId();
+            System.out.println("Suggest ID: " + suggestId);
+            System.out.print("Please enter to get this ID or input a new ID: ");
+            String sgId = sc.nextLine().trim();
+            String empty = "";
+            if (sgId.equals(empty)) {
+                return suggestId;
+            } else {
+                try {
+                    String id = sgId;
+                    int result = checkId(id);
+                    if (result == 0) {
+                        return Integer.parseInt(id);
+                    }
+                } catch (NumberFormatException | IOException e) {
+                    System.out.println("Invalid! Please input the id again. ");
+                    return inputId();
                 }
-            } catch (NumberFormatException | IOException e) {
-                System.out.println("Invalid! Please input the id again. ");
-                return inputId();
             }
         }
     }
@@ -104,6 +112,27 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
             reader.close();
             return result;
         }
+    }
+
+    public int suggestId() throws IOException {
+        int num = 0;
+        File file = new File("/Users/macbook/OOPProjects/Employee_Data/list.txt");
+        String currentLine;
+        if (file.length() == 0) {
+            num = 1;
+        } else {
+            BufferedReader reader = new BufferedReader(new FileReader("/Users/macbook/OOPProjects/Employee_Data/list.txt"));
+            while ((currentLine = reader.readLine()) != null) {
+                String[] array = currentLine.split("@");
+                for (int i = 1; i > 0; i++) {
+                    if (i != Integer.parseInt(array[0])) {
+                        num = i;
+                        break;
+                    }
+                }
+            }
+        }
+        return num;
     }
 
     public String inputName() {
