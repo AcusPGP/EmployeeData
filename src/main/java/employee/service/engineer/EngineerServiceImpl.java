@@ -25,26 +25,32 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
         System.out.println(" ");
         String type = "engineer";
         List<Person> employee = new ArrayList<>();
-        employee.add(new Person(id, name, age, address, type, degree));
+        employee.add(new Engineer(id, name, age, address, type, degree));
         Engineer en = new Engineer(id, name, age, address, type, degree);
         addToF(en);
     }
 
     @Override
     public void show() throws IOException {
-        System.out.println("\n");
+        System.out.println(" ");
         File file = new File("/Users/macbook/OOPProjects/Employee_Data/list.txt");
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        String currentLine;
-        while ((currentLine = reader.readLine()) != null) {
-            String[] array = currentLine.split("@");
-            if (array[4].equals("engineer")) {
-                System.out.println(currentLine + "\n");
-            } else {
-                continue;
+        if (file.length() == 0) {
+            System.out.println("No data in the list. Please insert a new employee in the list.");
+        } else {
+            System.out.println("---------------------------------------------------------------------------------------------");
+            System.out.printf("%5s %10s %9s %17s %15s %20S", "EMPLOYEE ID", "NAME", "AGE", "ADDRESS", "TYPE", "DEGREE" + "\n");
+            BufferedReader reader = new BufferedReader(new FileReader("/Users/macbook/OOPProjects/Employee_Data/list.txt"));
+            String currentLine;
+            while ((currentLine = reader.readLine()) != null) {
+                String[] array = currentLine.split("@");
+                if (array[4].equals("engineer")) {
+                    System.out.printf("%6s %15s %9s %15s %19s %19s", array[0], array[1], array[2], array[3], array[4], array[5] + "\n");
+                }
             }
+            System.out.println("---------------------------------------------------------------------------------------------");
+            System.out.println("");
+            reader.close();
         }
-        reader.close();
     }
 
     private boolean checkFileExist() {
@@ -124,8 +130,9 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
             BufferedReader reader = new BufferedReader(new FileReader("/Users/macbook/OOPProjects/Employee_Data/list.txt"));
             while ((currentLine = reader.readLine()) != null) {
                 String[] array = currentLine.split("@");
+                int temp = Integer.parseInt(array[0]);
                 for (int i = 1; i > 0; i++) {
-                    if (i != Integer.parseInt(array[0])) {
+                    if (i != Integer.parseInt(array[0]) && i > temp) {
                         num = i;
                         break;
                     }

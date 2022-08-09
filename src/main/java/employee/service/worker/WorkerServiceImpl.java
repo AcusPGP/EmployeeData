@@ -24,24 +24,32 @@ public class WorkerServiceImpl extends BaseEmployeeServiceImpl implements Worker
         System.out.println();
         String type = "worker";
         List<Person> employee = new ArrayList<>();
-        employee.add(new Person(id, name, age, address, type, level));
+        employee.add(new Worker(id, name, age, address, type, level));
         Worker worker = new Worker(id, name, age, address, type, level);
         addToF(worker);
     }
 
     @Override
     public void show() throws IOException {
-        System.out.println("\n");
+        System.out.println(" ");
         File file = new File("/Users/macbook/OOPProjects/Employee_Data/list.txt");
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        String currentLine;
-        while ((currentLine = reader.readLine()) != null) {
-            String[] array = currentLine.split("@");
-            if (array[4].equals("worker")) {
-                System.out.println(currentLine + "\n");
+        if (file.length() == 0) {
+            System.out.println("No data in the list. Please insert a new employee in the list.");
+        } else {
+            System.out.println("---------------------------------------------------------------------------------------------");
+            System.out.printf("%5s %10s %9s %17s %15s %19S", "EMPLOYEE ID", "NAME", "AGE", "ADDRESS", "TYPE", "LEVEL" + "\n");
+            BufferedReader reader = new BufferedReader(new FileReader("/Users/macbook/OOPProjects/Employee_Data/list.txt"));
+            String currentLine;
+            while ((currentLine = reader.readLine()) != null) {
+                String[] array = currentLine.split("@");
+                if (array[4].equals("worker")) {
+                    System.out.printf("%6s %15s %9s %15s %18s %19s", array[0], array[1], array[2], array[3], array[4], array[5] + "\n");
+                }
             }
+            System.out.println("---------------------------------------------------------------------------------------------");
+            System.out.println("");
+            reader.close();
         }
-        reader.close();
     }
 
 

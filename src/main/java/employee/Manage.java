@@ -1,13 +1,11 @@
 package employee;
 
-import employee.pojo.Person;
 import employee.service.BaseService;
 import employee.service.engineer.EngineerServiceImpl;
 import employee.service.worker.WorkerServiceImpl;
+import jdk.swing.interop.SwingInterOpUtils;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Manage {
@@ -47,16 +45,7 @@ public class Manage {
                 break;
             }
             case "3" -> {
-                List<Person> employee = new ArrayList<>();
-                System.out.println("---------------------------------------------------------------------------------------------");
-                System.out.printf("%5s %10s %10s %16s %20s %17s", "EMPLOYEE ID", "NAME", "AGE", "ADDRESS", "TYPE", "LEVEL/DEGREE");
-                System.out.println();
-                System.out.println("---------------------------------------------------------------------------------------------");
-                for (Person person : employee) {
-                    System.out.format("%7s %14s %7s %18s %25s %13s",person.getId(), person.getName(), person.getAge(), person.getAddress(), person.getType(), person.getLevel());
-                    System.out.println();
-                }
-                System.out.println("---------------------------------------------------------------------------------------------");
+                showAll();
                 break;
             }
         }
@@ -123,6 +112,25 @@ public class Manage {
         System.out.print("Please choose an option: ");
     }
 
+    public static void showAll() throws IOException {
+        System.out.println(" ");
+        File file = new File("/Users/macbook/OOPProjects/Employee_Data/list.txt");
+        if (file.length() == 0) {
+            System.out.println("No data in the list. Please insert a new employee in the list.");
+        } else {
+            System.out.println("---------------------------------------------------------------------------------------------");
+            System.out.printf("%5s %10s %9s %17s %15s %20S", "EMPLOYEE ID", "NAME", "AGE", "ADDRESS", "TYPE", "LEVEL/DEGREE" + "\n");
+            BufferedReader reader = new BufferedReader(new FileReader("/Users/macbook/OOPProjects/Employee_Data/list.txt"));
+            String currentLine;
+            while ((currentLine = reader.readLine()) != null) {
+                String[] array = currentLine.split("@");
+                System.out.printf("%6s %15s %9s %15s %18s %16s", array[0],array[1],array[2],array[3],array[4],array[5] + "\n");
+            }
+            System.out.println("---------------------------------------------------------------------------------------------");
+            System.out.println("");
+            reader.close();
+        }
+    }
 }
 
 
