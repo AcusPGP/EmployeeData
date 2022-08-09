@@ -98,7 +98,6 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
         }
     }
 
-
     public int checkId(String id) throws IOException {
         int result = 0;
         File check = new File("/Users/macbook/OOPProjects/Employee_Data/list.txt");
