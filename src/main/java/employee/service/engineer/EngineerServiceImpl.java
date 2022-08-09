@@ -2,9 +2,12 @@ package employee.service.engineer;
 
 import employee.Manage;
 import employee.pojo.Engineer;
+import employee.pojo.Person;
 import employee.service.BaseEmployeeServiceImpl;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements EngineerService {
@@ -21,6 +24,8 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
         String degree = chooseDegree();
         System.out.println(" ");
         String type = "engineer";
+        List<Person> employee = new ArrayList<>();
+        employee.add(new Person(id, name, age, address, type, degree));
         Engineer en = new Engineer(id, name, age, address, type, degree);
         addToF(en);
     }

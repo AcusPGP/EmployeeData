@@ -5,12 +5,11 @@ public class Person implements IGeneral {
     private int id;
     private int age;
     private String address;
-
     private String type;
-
     private String level;
 
     public Person(int id, String name, int age, String address, String type, String level) {
+        super();
         this.name = name;
         this.age = age;
         this.address = address;
@@ -66,12 +65,16 @@ public class Person implements IGeneral {
         return type;
     }
 
-    public void setLevel(String level) {this.level = level;}
+    public void setLevel(String level) {
+        this.level = level;
+    }
 
-    public String getLevel() {return level;}
+    public String getLevel() {
+        return level;
+    }
 
     public String toString() {
-        return id + "@" + name + "@" + age + "@" + address + "@" + type + "@" + level  ;
+        return id + "@" + name + "@" + age + "@" + address + "@" + type + "@" + level;
     }
 }
 

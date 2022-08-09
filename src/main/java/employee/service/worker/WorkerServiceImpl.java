@@ -1,10 +1,13 @@
 package employee.service.worker;
 
 import employee.Manage;
+import employee.pojo.Person;
 import employee.pojo.Worker;
 import employee.service.BaseEmployeeServiceImpl;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class WorkerServiceImpl extends BaseEmployeeServiceImpl implements WorkerService<Worker> {
@@ -12,14 +15,16 @@ public class WorkerServiceImpl extends BaseEmployeeServiceImpl implements Worker
 
     @Override
     public void add() {
-        System.out.println("\n");
+        System.out.println();
         int id = inputId();
         String name = inputName();
         int age = inputAge();
         String address = inputAddress();
         String level = chooseLevel();
-        System.out.println("\n");
+        System.out.println();
         String type = "worker";
+        List<Person> employee = new ArrayList<>();
+        employee.add(new Person(id, name, age, address, type, level));
         Worker worker = new Worker(id, name, age, address, type, level);
         addToF(worker);
     }
@@ -142,7 +147,7 @@ public class WorkerServiceImpl extends BaseEmployeeServiceImpl implements Worker
                 break;
             }
             case "2" -> {
-                level = "engineer";
+                level = "manager";
                 break;
             }
             default -> System.out.println("\n" + "Invalid! Please choose an option in the below menu. ");

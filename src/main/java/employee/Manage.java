@@ -1,10 +1,13 @@
 package employee;
 
+import employee.pojo.Person;
 import employee.service.BaseService;
 import employee.service.engineer.EngineerServiceImpl;
 import employee.service.worker.WorkerServiceImpl;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Manage {
@@ -44,14 +47,16 @@ public class Manage {
                 break;
             }
             case "3" -> {
-                System.out.println("\n");
-                File file = new File("/Users/macbook/OOPProjects/Employee_Data/list.txt");
-                Scanner read = new Scanner(file);
-                while (read.hasNextLine()) {
-                    System.out.println(read.nextLine());
+                List<Person> employee = new ArrayList<>();
+                System.out.println("---------------------------------------------------------------------------------------------");
+                System.out.printf("%5s %10s %10s %16s %20s %17s", "EMPLOYEE ID", "NAME", "AGE", "ADDRESS", "TYPE", "LEVEL/DEGREE");
+                System.out.println();
+                System.out.println("---------------------------------------------------------------------------------------------");
+                for (Person person : employee) {
+                    System.out.format("%7s %14s %7s %18s %25s %13s",person.getId(), person.getName(), person.getAge(), person.getAddress(), person.getType(), person.getLevel());
+                    System.out.println();
                 }
-                System.out.println("\n");
-                read.close();
+                System.out.println("---------------------------------------------------------------------------------------------");
                 break;
             }
         }
