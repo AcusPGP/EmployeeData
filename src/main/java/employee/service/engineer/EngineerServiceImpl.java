@@ -6,9 +6,7 @@ import employee.pojo.Person;
 import employee.service.BaseEmployeeServiceImpl;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements EngineerService {
 
@@ -37,17 +35,19 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
         if (file.length() == 0) {
             System.out.println("No data in the list. Please insert a new employee in the list.");
         } else {
-            System.out.println("---------------------------------------------------------------------------------------------");
-            System.out.printf("%5s %10s %9s %17s %15s %20S", "EMPLOYEE ID", "NAME", "AGE", "ADDRESS", "TYPE", "DEGREE" + "\n");
+            System.out.println("-------------------------------------------------------------------------------------------------");
+            Formatter fmt = new Formatter();
+            fmt.format("%15s %15s %15s %15s %15s %15s\n", "EMPLOYEE ID", "NAME", "AGE", "ADDRESS", "TYPE", "LEVEL/DEGREE");
             BufferedReader reader = new BufferedReader(new FileReader("/Users/macbook/OOPProjects/Employee_Data/list.txt"));
             String currentLine;
             while ((currentLine = reader.readLine()) != null) {
                 String[] array = currentLine.split("@");
                 if (array[4].equals("engineer")) {
-                    System.out.printf("%6s %15s %9s %15s %19s %19s", array[0], array[1], array[2], array[3], array[4], array[5] + "\n");
+                    fmt.format("%10s %20s %15s %15s %15s %14s\n",array[0],array[1],array[2],array[3],array[4],array[5]);
                 }
             }
-            System.out.println("---------------------------------------------------------------------------------------------");
+            System.out.print(fmt);
+            System.out.println("-------------------------------------------------------------------------------------------------");
             System.out.println("");
             reader.close();
         }
@@ -98,6 +98,7 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
         }
     }
 
+
     public int checkId(String id) throws IOException {
         int result = 0;
         File check = new File("/Users/macbook/OOPProjects/Employee_Data/list.txt");
@@ -127,14 +128,23 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
         if (file.length() == 0) {
             num = 1;
         } else {
+            ArrayList<Integer> ar = new ArrayList<>();
             BufferedReader reader = new BufferedReader(new FileReader("/Users/macbook/OOPProjects/Employee_Data/list.txt"));
             while ((currentLine = reader.readLine()) != null) {
                 String[] array = currentLine.split("@");
-                int temp = Integer.parseInt(array[0]);
-                for (int i = 1; i > 0; i++) {
-                    if (i != Integer.parseInt(array[0]) && i > temp) {
+                ar.add(Integer.parseInt(array[0]));
+            }
+            reader.close();
+            int length = Collections.max(ar);
+            if (length == ar.size()) {
+                num = length + 1;
+            } else {
+                for (int i = 1; i <= length; i++) {
+                    if (ar.contains(i)) {
+                        continue;
+                    } else {
                         num = i;
-                        break;
+                        return num;
                     }
                 }
             }

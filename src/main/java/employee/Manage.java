@@ -3,9 +3,9 @@ package employee;
 import employee.service.BaseService;
 import employee.service.engineer.EngineerServiceImpl;
 import employee.service.worker.WorkerServiceImpl;
-import jdk.swing.interop.SwingInterOpUtils;
 
 import java.io.*;
+import java.util.Formatter;
 import java.util.Scanner;
 
 public class Manage {
@@ -118,19 +118,20 @@ public class Manage {
         if (file.length() == 0) {
             System.out.println("No data in the list. Please insert a new employee in the list.");
         } else {
-            System.out.println("---------------------------------------------------------------------------------------------");
-            System.out.printf("%5s %10s %9s %17s %15s %20S", "EMPLOYEE ID", "NAME", "AGE", "ADDRESS", "TYPE", "LEVEL/DEGREE" + "\n");
+            System.out.println("-------------------------------------------------------------------------------------------------");
+            Formatter fmt = new Formatter();
+            fmt.format("%15s %15s %15s %15s %15s %15s\n", "EMPLOYEE ID", "NAME", "AGE", "ADDRESS", "TYPE", "LEVEL/DEGREE");
             BufferedReader reader = new BufferedReader(new FileReader("/Users/macbook/OOPProjects/Employee_Data/list.txt"));
             String currentLine;
             while ((currentLine = reader.readLine()) != null) {
                 String[] array = currentLine.split("@");
-                System.out.printf("%6s %15s %9s %15s %18s %16s", array[0],array[1],array[2],array[3],array[4],array[5] + "\n");
+                fmt.format("%10s %20s %15s %15s %15s %14s\n",array[0],array[1],array[2],array[3],array[4],array[5]);
             }
-            System.out.println("---------------------------------------------------------------------------------------------");
+            System.out.print(fmt);
+            System.out.println("-------------------------------------------------------------------------------------------------");
             System.out.println("");
             reader.close();
         }
     }
 }
-
 
