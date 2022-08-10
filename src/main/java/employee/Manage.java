@@ -125,7 +125,7 @@ public class Manage {
             String currentLine;
             while ((currentLine = reader.readLine()) != null) {
                 String[] array = currentLine.split("@");
-                fmt.format("%10s %20s %15s %15s %15s %14s\n",array[0],array[1],array[2],array[3],array[4],array[5]);
+                fmt.format("%10s %20s %15s %15s %15s %14s\n", array[0], array[1], array[2], array[3], array[4], array[5]);
             }
             System.out.print(fmt);
             System.out.println("-------------------------------------------------------------------------------------------------");

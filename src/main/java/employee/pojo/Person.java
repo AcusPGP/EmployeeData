@@ -18,6 +18,8 @@ public class Person implements IGeneral {
         this.level = level;
     }
 
+
+
     @Override
     public void setName(String name) {
         this.name = name;
@@ -75,5 +77,9 @@ public class Person implements IGeneral {
 
     public String toString() {
         return id + "@" + name + "@" + age + "@" + address + "@" + type + "@" + level;
+    }
+
+    public String toTexTLine() {
+        return String.format("%5s %15s %5s %15s %10s %10s", id, name, age, address, type, level);
     }
 }

@@ -25,6 +25,7 @@ public class WorkerServiceImpl extends BaseEmployeeServiceImpl implements Worker
         employee.add(new Worker(id, name, age, address, type, level));
         Worker worker = new Worker(id, name, age, address, type, level);
         addToF(worker);
+        addToTableList(worker);
     }
 
     @Override
@@ -71,6 +72,18 @@ public class WorkerServiceImpl extends BaseEmployeeServiceImpl implements Worker
             myList.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    public void addToTableList(Worker worker) {
+        try {
+            File file = new File("/Users/macbook/OOPProjects/Employee_Data/table_list.txt");
+            FileWriter writer = new FileWriter(file);
+            writer.write(worker.toTexTLine() + "\n");
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
         }
     }
 
