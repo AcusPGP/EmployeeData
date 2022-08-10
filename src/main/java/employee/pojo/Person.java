@@ -77,4 +77,3 @@ public class Person implements IGeneral {
         return id + "@" + name + "@" + age + "@" + address + "@" + type + "@" + level;
     }
 }
-
