@@ -18,7 +18,6 @@ public class Main {
         boolean exit = false;
         Manage employee = new Manage();
         showMenu();
-        createTableListFile();
         while (true) {
             input = sc.nextLine().trim();
             switch (input) {
@@ -49,19 +48,6 @@ public class Main {
         }
     }
 
-    public static void createTableListFile() {
-        try {
-            File file = new File(EmployeeConstants.LIST_PATH);
-            if (file.createNewFile()) {
-                FileWriter writer = new FileWriter(EmployeeConstants.LIST_PATH);
-                writer.write(String.format("%5s %15s %5s %15s %10s %10s", "EMPLOYEE ID", "NAME", "AGE", "ADDRESS", "TYPE", "LEVEL/DEGREE") + "\n");
-                writer.close();
-            }
-        } catch (IOException e) {
-            System.out.println(EmployeeConstants.ERROR_OCCURRED);
-            e.printStackTrace();
-        }
-    }
 
     static void showMenu() {
         System.out.println("----------Menu----------");

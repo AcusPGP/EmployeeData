@@ -3,11 +3,19 @@ package employee.pojo.utils;
 public final class EmployeeConstants {
     /**
      * Special
+     *
+     * @return
      */
+    static String objectPath() {
+        String objectPath = System.getProperty("object.list", "/employee.file/object.list");
+        return objectPath;
+    }
+
     public static final String CHOOSE_FUNCTION = "Please choose an option: ";
-    public static final String LIST_PATH = "/Users/macbook/OOPProjects/Employee_Data/table_list.txt";
-    public static final String ERROR_OCCURRED = "An error occurred";
+    public static final String LIST_PATH = "/Users/macbook/OOPProjects/Employee_Data/list.txt";
     public static final String INVALID_OUTPUT = "Invalid! Please choose an option in the below menu: ";
+
+    public static final String ABSOLUTE_OBJECT_PATH = objectPath();
 
     /**
      * Main
@@ -24,8 +32,8 @@ public final class EmployeeConstants {
      */
     // showOptionAdd
     public static final String JOB_POSTIONS = "Job Positions";
-    public static final String WORKER = "worker";
-    public static final String ENGINEER = "engineer";
+    public static final String WORKER = "1. worker";
+    public static final String ENGINEER = "2. engineer";
     // showOptionShow
     public static final String SHOW_OPTIONS = "Show options";
     public static final String SHOW_WORKER_LIST = "1. Show worker list";
