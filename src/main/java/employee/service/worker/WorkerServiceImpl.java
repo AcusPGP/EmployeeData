@@ -26,7 +26,6 @@ public class WorkerServiceImpl extends BaseEmployeeServiceImpl implements Worker
         employee.add(new Worker(id, name, age, address, type, level));
         Worker worker = new Worker(id, name, age, address, type, level);
         addToF(worker);
-        addToTableList(worker);
     }
 
     @Override
@@ -56,7 +55,7 @@ public class WorkerServiceImpl extends BaseEmployeeServiceImpl implements Worker
 
 
     private boolean checkFileExist() {
-        File file = new File(Manage.FILE_PATH);
+        File file = new File(EmployeeConstants.LIST_PATH);
         return file.exists();
     }
 
@@ -64,27 +63,15 @@ public class WorkerServiceImpl extends BaseEmployeeServiceImpl implements Worker
         FileWriter myList = null;
         try {
             if (checkFileExist()) {
-                myList = new FileWriter(Manage.FILE_PATH, true);
+                myList = new FileWriter(EmployeeConstants.LIST_PATH, true);
                 myList.write(worker.toString() + "\n");
             } else {
-                myList = new FileWriter(Manage.FILE_PATH);
+                myList = new FileWriter(EmployeeConstants.LIST_PATH);
                 myList.write(worker.toString() + "\n");
             }
             myList.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
-        }
-    }
-
-    public void addToTableList(Worker worker) {
-        try {
-            File file = new File(EmployeeConstants.LIST_PATH);
-            FileWriter writer = new FileWriter(file);
-            writer.write(worker.toTexTLine() + "\n");
-            writer.close();
-        } catch (IOException e) {
-            System.out.println(EmployeeConstants.ERROR_OCCURRED);
-            e.printStackTrace();
         }
     }
 

@@ -27,7 +27,6 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
         employee.add(new Engineer(id, name, age, address, type, degree));
         Engineer en = new Engineer(id, name, age, address, type, degree);
         addToF(en);
-        addToTableList(en);
     }
 
     @Override
@@ -73,18 +72,6 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
             myList.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
-        }
-    }
-
-    public void addToTableList(Engineer en) {
-        try {
-            File file = new File(EmployeeConstants.LIST_PATH);
-            FileWriter writer = new FileWriter(file);
-            writer.write(en.toTexTLine() + "\n");
-            writer.close();
-        } catch (IOException e) {
-            System.out.println(EmployeeConstants.ERROR_OCCURRED);
-            e.printStackTrace();
         }
     }
 

@@ -77,7 +77,4 @@ public class Person implements IGeneral {
         return id + "@" + name + "@" + age + "@" + address + "@" + type + "@" + level;
     }
 
-    public String toTexTLine() {
-        return String.format("%5s %15s %5s %15s %10s %10s", id, name, age, address, type, level);
-    }
 }

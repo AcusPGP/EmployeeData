@@ -1,20 +1,27 @@
 package employee.pojo.utils;
 
 public final class EmployeeConstants {
-    // Special
+    /**
+     * Special
+     */
     public static final String CHOOSE_FUNCTION = "Please choose an option: ";
     public static final String LIST_PATH = "/Users/macbook/OOPProjects/Employee_Data/table_list.txt";
     public static final String ERROR_OCCURRED = "An error occurred";
     public static final String INVALID_OUTPUT = "Invalid! Please choose an option in the below menu: ";
 
-    // Main: Menu
+    /**
+     * Main
+     */
+    //Menu
     public static final String ADD = "1. Add an employee.";
     public static final String SHOW = "2. Show the list of employees.";
     public static final String EDIT_UPDATE = "3. Edit and Update the employee's information.";
     public static final String DELETE = "4. Delete the employee's information.";
     public static final String EXIT = "5. Exit.";
 
-    // Manage
+    /**
+     * Manage
+     */
     // showOptionAdd
     public static final String JOB_POSTIONS = "Job Positions";
     public static final String WORKER = "worker";
@@ -32,20 +39,24 @@ public final class EmployeeConstants {
     public static final String DELETE_OPTIONS = "Delete Options";
     public static final String DELETE_ID_WORKER = "1. Delete worker by id";
     public static final String DELETE_ID_ENGINEER = "2. Delete engineer by id";
-    // WorkerServiceImpl and EngineerServiceImpl
+
+    /**
+     * WorkerServiceImpl and EngineerServiceImpl
+     */
     public static final String INPUT_ID = "Please enter to get this ID or input a new ID: ";
     public static final String INPUT_NAME = "Input the name: ";
     public static final String INPUT_AGE = "Input the age: ";
     public static final String INPUT_ADDRESS = "Input the address: ";
 
-    // BaseEmployeeServiceImpl
+    /**
+     * BasicServiceImpl
+     */
     // edit
     public static final String INPUT_ID_TO_EDIT = "Please choose an Id to edit: ";
     public static final String INPUT_NEWNAME = "Input a new name: ";
     public static final String INPUT_NEWAGE = "Input a new age: ";
     public static final String INPUT_NEWADDRESS = "Input a new address: ";
     public static final String INPUT_NEWTYPE = "Input a new type: ";
-
     // edit_functions
     public static final String EDIT_FUNCTIONS = "Edit functions";
     public static final String CHANGE_NAME = "1. Change the name.";
