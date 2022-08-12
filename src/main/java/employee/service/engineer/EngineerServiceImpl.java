@@ -3,6 +3,7 @@ package employee.service.engineer;
 import employee.Manage;
 import employee.pojo.Engineer;
 import employee.pojo.Person;
+import employee.pojo.utils.EmployeeConstants;
 import employee.service.BaseEmployeeServiceImpl;
 
 import java.io.*;
@@ -32,14 +33,14 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
     @Override
     public void show() throws IOException {
         System.out.println(" ");
-        File file = new File("/Users/macbook/OOPProjects/Employee_Data/list.txt");
+        File file = new File(EmployeeConstants.LIST_PATH);
         if (file.length() == 0) {
             System.out.println("No data in the list. Please insert a new employee in the list.");
         } else {
             System.out.println("-------------------------------------------------------------------------------------------------");
             Formatter fmt = new Formatter();
             fmt.format("%15s %15s %15s %15s %15s %15s\n", "EMPLOYEE ID", "NAME", "AGE", "ADDRESS", "TYPE", "LEVEL/DEGREE");
-            BufferedReader reader = new BufferedReader(new FileReader("/Users/macbook/OOPProjects/Employee_Data/list.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader(EmployeeConstants.LIST_PATH));
             String currentLine;
             while ((currentLine = reader.readLine()) != null) {
                 String[] array = currentLine.split("@");
@@ -55,7 +56,7 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
     }
 
     private boolean checkFileExist() {
-        File file = new File(Manage.FILE_PATH);
+        File file = new File(EmployeeConstants.LIST_PATH);
         return file.exists();
     }
 
@@ -63,10 +64,10 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
         FileWriter myList = null;
         try {
             if (checkFileExist()) {
-                myList = new FileWriter(Manage.FILE_PATH, true);
+                myList = new FileWriter(EmployeeConstants.LIST_PATH, true);
                 myList.write(en.toString() + "\n");
             } else {
-                myList = new FileWriter(Manage.FILE_PATH);
+                myList = new FileWriter(EmployeeConstants.LIST_PATH);
                 myList.write(en.toString() + "\n");
             }
             myList.close();
@@ -77,12 +78,12 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
 
     public void addToTableList(Engineer en) {
         try {
-            File file = new File("/Users/macbook/OOPProjects/Employee_Data/table_list.txt");
+            File file = new File(EmployeeConstants.LIST_PATH);
             FileWriter writer = new FileWriter(file);
             writer.write(en.toTexTLine() + "\n");
             writer.close();
         } catch (IOException e) {
-            System.out.println("An error occurred.");
+            System.out.println(EmployeeConstants.ERROR_OCCURRED);
             e.printStackTrace();
         }
     }
@@ -91,7 +92,7 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
         while (true) {
             int suggestId = suggestId();
             System.out.println("Suggest ID: " + suggestId);
-            System.out.print("Please enter to get this ID or input a new ID: ");
+            System.out.print(EmployeeConstants.INPUT_ID);
             String sgId = sc.nextLine().trim();
             String empty = "";
             if (sgId.equals(empty)) {
@@ -113,7 +114,7 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
 
     public int checkId(String id) throws IOException {
         int result = 0;
-        File check = new File("/Users/macbook/OOPProjects/Employee_Data/list.txt");
+        File check = new File(EmployeeConstants.LIST_PATH);
         if (check.length() == 0) {
             return result;
         } else {
@@ -135,13 +136,13 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
 
     public int suggestId() throws IOException {
         int num = 0;
-        File file = new File("/Users/macbook/OOPProjects/Employee_Data/list.txt");
+        File file = new File(EmployeeConstants.LIST_PATH);
         String currentLine;
         if (file.length() == 0) {
             num = 1;
         } else {
             ArrayList<Integer> ar = new ArrayList<>();
-            BufferedReader reader = new BufferedReader(new FileReader("/Users/macbook/OOPProjects/Employee_Data/list.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader(EmployeeConstants.LIST_PATH));
             while ((currentLine = reader.readLine()) != null) {
                 String[] array = currentLine.split("@");
                 ar.add(Integer.parseInt(array[0]));
@@ -165,12 +166,12 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
     }
 
     public String inputName() {
-        System.out.print("Input the name: ");
+        System.out.print(EmployeeConstants.INPUT_NAME);
         return sc.nextLine();
     }
 
     public int inputAge() {
-        System.out.print("Input the age: ");
+        System.out.print(EmployeeConstants.INPUT_AGE);
         try {
             int age = Integer.parseInt(sc.nextLine().trim());
             if (age >= 1 && age <= 100) {
@@ -186,7 +187,7 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
     }
 
     public String inputAddress() {
-        System.out.print("Input the address: ");
+        System.out.print(EmployeeConstants.INPUT_ADDRESS);
         return sc.nextLine();
     }
 
@@ -211,7 +212,7 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
                 degree = "full-stack";
                 break;
             }
-            default -> System.out.println("\n" + "Invalid! Please choose an option in the below menu. ");
+            default -> System.out.println("\n" + EmployeeConstants.INVALID_OUTPUT);
         }
         return degree;
     }

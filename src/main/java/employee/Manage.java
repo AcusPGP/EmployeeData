@@ -1,5 +1,6 @@
 package employee;
 
+import employee.pojo.utils.EmployeeConstants;
 import employee.service.BaseService;
 import employee.service.engineer.EngineerServiceImpl;
 import employee.service.worker.WorkerServiceImpl;
@@ -9,8 +10,6 @@ import java.util.Formatter;
 import java.util.Scanner;
 
 public class Manage {
-
-    public static final String FILE_PATH = "/Users/macbook/OOPProjects/Employee_Data/list.txt";
 
     Scanner sc = new Scanner(System.in);
 
@@ -26,7 +25,7 @@ public class Manage {
                 BaseService engineer = new EngineerServiceImpl();
                 engineer.add();
             }
-            default -> System.out.println("\n" + "Invalid! Please choose an option in the below menu. ");
+            default -> System.out.println("\n" + EmployeeConstants.INVALID_OUTPUT);
         }
     }
 
@@ -63,7 +62,7 @@ public class Manage {
                 BaseService engineer = new EngineerServiceImpl();
                 engineer.edit();
             }
-            default -> System.out.println("\n" + "Invalid! Please choose an option in the below menu. ");
+            default -> System.out.println("\n" + EmployeeConstants.INVALID_OUTPUT);
         }
     }
 
@@ -79,49 +78,49 @@ public class Manage {
                 BaseService engineer = new EngineerServiceImpl();
                 engineer.delete();
             }
-            default -> System.out.println("\n" + "Invalid! Please choose an option in the below menu. ");
+            default -> System.out.println("\n" + EmployeeConstants.INVALID_OUTPUT);
         }
     }
 
     static void showOptionAdd() {
-        System.out.println("Job Position");
-        System.out.println("1. Worker.");
-        System.out.println("2. Engineer.");
-        System.out.print("Please choose an option: ");
+        System.out.println(EmployeeConstants.JOB_POSTIONS);
+        System.out.println(EmployeeConstants.WORKER);
+        System.out.println(EmployeeConstants.ENGINEER);
+        System.out.print(EmployeeConstants.CHOOSE_FUNCTION);
     }
 
     static void showOptionShow() {
-        System.out.println("Show Options");
-        System.out.println("1. Show worker list");
-        System.out.println("2. Show engineer list");
-        System.out.println("3. Show full list");
-        System.out.print("Please choose an option: ");
+        System.out.println(EmployeeConstants.SHOW_OPTIONS);
+        System.out.println(EmployeeConstants.SHOW_WORKER_LIST);
+        System.out.println(EmployeeConstants.SHOW_ENGINEER_LIST);
+        System.out.println(EmployeeConstants.SHOW_ALL);
+        System.out.print(EmployeeConstants.CHOOSE_FUNCTION);
     }
 
     static void showOptionEdit() {
-        System.out.println("Edit Options");
-        System.out.println("1. Change the worker's info by id.");
-        System.out.println("2. Change the engineer's info by id.");
-        System.out.print("Please choose an option: ");
+        System.out.println(EmployeeConstants.EDIT_OPTIONS);
+        System.out.println(EmployeeConstants.EDIT_ID_WORKER);
+        System.out.println(EmployeeConstants.EDIT_ID_ENGINEER);
+        System.out.print(EmployeeConstants.CHOOSE_FUNCTION);
     }
 
     static void showOptionDelete() {
-        System.out.println("Delete Options");
-        System.out.println("1. Delete a worker by id.");
-        System.out.println("2. Delete a engineer by id.");
-        System.out.print("Please choose an option: ");
+        System.out.println(EmployeeConstants.DELETE_OPTIONS);
+        System.out.println(EmployeeConstants.DELETE_ID_WORKER);
+        System.out.println(EmployeeConstants.DELETE_ID_ENGINEER);
+        System.out.print(EmployeeConstants.CHOOSE_FUNCTION);
     }
 
     public static void showAll() throws IOException {
         System.out.println(" ");
-        File file = new File("/Users/macbook/OOPProjects/Employee_Data/list.txt");
+        File file = new File(EmployeeConstants.LIST_PATH);
         if (file.length() == 0) {
             System.out.println("No data in the list. Please insert a new employee in the list.");
         } else {
             System.out.println("-------------------------------------------------------------------------------------------------");
             Formatter fmt = new Formatter();
             fmt.format("%15s %15s %15s %15s %15s %15s\n", "EMPLOYEE ID", "NAME", "AGE", "ADDRESS", "TYPE", "LEVEL/DEGREE");
-            BufferedReader reader = new BufferedReader(new FileReader("/Users/macbook/OOPProjects/Employee_Data/list.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader(EmployeeConstants.LIST_PATH));
             String currentLine;
             while ((currentLine = reader.readLine()) != null) {
                 String[] array = currentLine.split("@");

@@ -18,8 +18,6 @@ public class Person implements IGeneral {
         this.level = level;
     }
 
-
-
     @Override
     public void setName(String name) {
         this.name = name;

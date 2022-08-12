@@ -1,5 +1,7 @@
 package employee.service;
 
+import employee.pojo.utils.EmployeeConstants;
+
 import java.io.*;
 import java.util.Scanner;
 
@@ -8,10 +10,10 @@ public abstract class BaseEmployeeServiceImpl implements BaseService {
     Scanner sc = new Scanner(System.in);
 
     public void edit() throws IOException {
-        System.out.print("Please input an Id to edit: ");
+        System.out.print(EmployeeConstants.INPUT_ID_TO_EDIT);
         String id = sc.nextLine();
-        File file = new File("/Users/macbook/OOPProjects/Employee_Data/list.txt");
-        File temp = new File("/Users/macbook/OOPProjects/Employee_Data/temp.txt");
+        File file = new File(EmployeeConstants.LIST_PATH);
+        File temp = new File(EmployeeConstants.LIST_PATH);
         BufferedReader reader = new BufferedReader(new FileReader(file));
         BufferedWriter writer = new BufferedWriter(new FileWriter(temp));
         String curentLine;
@@ -30,7 +32,7 @@ public abstract class BaseEmployeeServiceImpl implements BaseService {
                         aDDRESS = array[3];
                         tYPE = array[4];
                         ld = array[5];
-                        System.out.print("Input a new name: ");
+                        System.out.print(EmployeeConstants.INPUT_NEWNAME);
                         nAME = sc.nextLine().trim();
                         writer.write(iD + "@" + nAME + "@" + aGE + "@" + aDDRESS + "@" + tYPE + "@" + ld);
                         writer.close();
@@ -42,7 +44,7 @@ public abstract class BaseEmployeeServiceImpl implements BaseService {
                         aDDRESS = array[3];
                         tYPE = array[4];
                         ld = array[5];
-                        System.out.print("Input a new age: ");
+                        System.out.print(EmployeeConstants.INPUT_NEWAGE);
                         aGE = Integer.parseInt(sc.nextLine().trim());
                         writer.write(iD + "@" + nAME + "@" + aGE + "@" + aDDRESS + "@" + tYPE + "@" + ld);
                         writer.close();
@@ -54,7 +56,7 @@ public abstract class BaseEmployeeServiceImpl implements BaseService {
                         aGE = Integer.parseInt(array[2]);
                         tYPE = array[4];
                         ld = array[5];
-                        System.out.print("Input a new address: ");
+                        System.out.print(EmployeeConstants.INPUT_NEWADDRESS);
                         aDDRESS = sc.nextLine();
                         writer.write(iD + "@" + nAME + "@" + aGE + "@" + aDDRESS + "@" + tYPE + "@" + ld);
                         writer.close();
@@ -65,7 +67,7 @@ public abstract class BaseEmployeeServiceImpl implements BaseService {
                         nAME = array[1];
                         aGE = Integer.parseInt(array[2]);
                         aDDRESS = array[3];
-                        System.out.print("Input a new type: ");
+                        System.out.print(EmployeeConstants.INPUT_NEWTYPE);
                         tYPE = sc.nextLine();
                         if (tYPE.equals("worker")) {
                             ld = showWorkerLevel();
@@ -89,10 +91,10 @@ public abstract class BaseEmployeeServiceImpl implements BaseService {
 
 
     public void delete() throws IOException {
-        System.out.print("Please choose an Id to delete: ");
+        System.out.print(EmployeeConstants.INPUT_ID_TO_DELETE);
         String id = sc.nextLine().trim();
-        File inputF = new File("/Users/macbook/OOPProjects/Employee_Data/list.txt");
-        File tempF = new File("/Users/macbook/OOPProjects/Employee_Data/temp.txt");
+        File inputF = new File(EmployeeConstants.LIST_PATH);
+        File tempF = new File(EmployeeConstants.LIST_PATH);
         BufferedReader reader = new BufferedReader(new FileReader(inputF));
         BufferedWriter writer = new BufferedWriter(new FileWriter(tempF));
         String currentLine;
@@ -109,12 +111,12 @@ public abstract class BaseEmployeeServiceImpl implements BaseService {
     }
 
     static void showEditFunctions() {
-        System.out.println("Edit Functions");
-        System.out.println("1. Change the name.");
-        System.out.println("2. Change the age.");
-        System.out.println("3. Change the address.");
-        System.out.println("4. Change the type employee.");
-        System.out.print("Please choose an option: ");
+        System.out.println(EmployeeConstants.EDIT_FUNCTIONS);
+        System.out.println(EmployeeConstants.CHANGE_NAME);
+        System.out.println(EmployeeConstants.CHANGE_AGE);
+        System.out.println(EmployeeConstants.CHANGE_ADDRESS);
+        System.out.println(EmployeeConstants.CHANGE_TYPE);
+        System.out.print(EmployeeConstants.CHOOSE_FUNCTION);
     }
 
     public String showWorkerLevel() {
