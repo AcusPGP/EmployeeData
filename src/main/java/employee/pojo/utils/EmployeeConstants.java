@@ -7,7 +7,7 @@ public final class EmployeeConstants {
      * @return
      */
     static String objectPath() {
-        String objectPath = System.getProperty("object.list", "/employee.file/object.list");
+        String objectPath = System.getProperty("object.list");
         return objectPath;
     }
 
