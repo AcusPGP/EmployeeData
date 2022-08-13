@@ -26,9 +26,8 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
         List<Person> employee = new ArrayList<>();
         employee.add(new Engineer(id, name, age, address, type, degree));
         Engineer en = new Engineer(id, name, age, address, type, degree);
-        Engineer enToObject = new Engineer(id, name, age, address, type, degree);
         addToF(en);
-        addToObject(enToObject);
+        addToObject(en);
     }
 
     @Override
@@ -77,12 +76,12 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
         }
     }
 
-    private void addToObject(Engineer enToObject) {
+    private void addToObject(Engineer en) {
         try {
             FileOutputStream fos = new FileOutputStream("object.list");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             // Write object to file
-            oos.writeObject(enToObject.toString() + "\n");
+            oos.writeObject(en.toString() + "\n");
             // Close resources
             fos.close();
             oos.close();

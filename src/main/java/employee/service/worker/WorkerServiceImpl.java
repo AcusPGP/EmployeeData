@@ -24,9 +24,8 @@ public class WorkerServiceImpl extends BaseEmployeeServiceImpl implements Worker
         List<Person> employee = new ArrayList<>();
         employee.add(new Worker(id, name, age, address, type, level));
         Worker worker = new Worker(id, name, age, address, type, level);
-        Worker woToObject = new Worker(id, name, age, address, type, level);
         addToF(worker);
-        addToObject(woToObject);
+        addToObject(worker);
     }
 
     @Override
@@ -75,9 +74,16 @@ public class WorkerServiceImpl extends BaseEmployeeServiceImpl implements Worker
             System.out.println(e.getMessage());
         }
     }
-    private void addToObject(Worker woToObject) {
-        try (FileOutputStream fos = new FileOutputStream("object.list"); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-            oos.writeObject(woToObject.toString() + "\n");
+
+    private void addToObject(Worker wo) {
+        try {
+            FileOutputStream fos = new FileOutputStream("object.list");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            // Write object to file
+            oos.writeObject(wo.toString() + "\n");
+            // Close resources
+            oos.close();
+            fos.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
