@@ -39,6 +39,7 @@ public final class EmployeeConstants {
     public static final String SHOW_WORKER_LIST = "1. Show worker list";
     public static final String SHOW_ENGINEER_LIST = "2. Show engineer list";
     public static final String SHOW_ALL = "3. Show full list";
+    public static final String SHOW_OBJECT = "4. Show object.list";
     // showOptionEdit
     public static final String EDIT_OPTIONS = "Edit Options";
     public static final String EDIT_ID_WORKER = "1. Change the worker's info by id";

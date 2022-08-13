@@ -1,6 +1,5 @@
 package employee.service.worker;
 
-import employee.pojo.Person;
 import employee.pojo.Worker;
 import employee.pojo.utils.EmployeeConstants;
 import employee.service.BaseEmployeeServiceImpl;
@@ -9,6 +8,7 @@ import java.io.*;
 import java.util.*;
 
 public class WorkerServiceImpl extends BaseEmployeeServiceImpl implements WorkerService<Worker> {
+
     Scanner sc = new Scanner(System.in);
 
     @Override
@@ -21,8 +21,6 @@ public class WorkerServiceImpl extends BaseEmployeeServiceImpl implements Worker
         String level = chooseLevel();
         System.out.println();
         String type = "worker";
-        List<Person> employee = new ArrayList<>();
-        employee.add(new Worker(id, name, age, address, type, level));
         Worker worker = new Worker(id, name, age, address, type, level);
         addToF(worker);
         addToObject(worker);
@@ -77,13 +75,11 @@ public class WorkerServiceImpl extends BaseEmployeeServiceImpl implements Worker
 
     private void addToObject(Worker wo) {
         try {
-            FileOutputStream fos = new FileOutputStream("object.list");
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("object.list"));
             // Write object to file
             oos.writeObject(wo.toString() + "\n");
             // Close resources
             oos.close();
-            fos.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,8 +1,6 @@
 package employee.service.engineer;
 
-import employee.Manage;
 import employee.pojo.Engineer;
-import employee.pojo.Person;
 import employee.pojo.utils.EmployeeConstants;
 import employee.service.BaseEmployeeServiceImpl;
 
@@ -23,8 +21,6 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
         String degree = chooseDegree();
         System.out.println(" ");
         String type = "engineer";
-        List<Person> employee = new ArrayList<>();
-        employee.add(new Engineer(id, name, age, address, type, degree));
         Engineer en = new Engineer(id, name, age, address, type, degree);
         addToF(en);
         addToObject(en);
@@ -78,12 +74,10 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
 
     private void addToObject(Engineer en) {
         try {
-            FileOutputStream fos = new FileOutputStream("object.list");
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("object.list"));
             // Write object to file
             oos.writeObject(en.toString() + "\n");
             // Close resources
-            fos.close();
             oos.close();
         } catch (IOException e) {
             e.printStackTrace();
