@@ -26,13 +26,13 @@
             <Pane blendMode="DARKEN" cache="true" layoutX="187.0" layoutY="47.0" prefHeight="331.0" prefWidth="237.0"
                   style="-fx-border-color: Black;">
                 <children>
-                    <Label fx:id="welcomeText1" alignment="CENTER" layoutX="16.0" layoutY="8.0" prefHeight="26.0"
+                    <Label alignment="CENTER" layoutX="16.0" layoutY="8.0" prefHeight="26.0"
                            prefWidth="205.0" text="MENU" textAlignment="CENTER" underline="true">
                         <font>
                             <Font size="15.0"/>
                         </font>
                     </Label>
-                    <Label fx:id="welcomeText2" alignment="CENTER" layoutX="5.0" layoutY="34.0" prefHeight="26.0"
+                    <Label alignment="CENTER" layoutX="5.0" layoutY="34.0" prefHeight="26.0"
                            prefWidth="227.0" text="Please choose an option down below" textAlignment="CENTER">
                         <font>
                             <Font size="14.0"/>
@@ -44,7 +44,7 @@
                             <Font size="15.0"/>
                         </font>
                     </Button>
-                    <Button layoutX="92.0" layoutY="124.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="94.0"
+                    <Button layoutX="92.0" layoutY="124.0" mnemonicParsing="false" onAction="#onShowButtonClick" prefHeight="30.0" prefWidth="94.0"
                             text="Show">
                         <font>
                             <Font size="15.0"/>
