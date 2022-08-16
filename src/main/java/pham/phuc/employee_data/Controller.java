@@ -10,26 +10,21 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 public class Controller {
-    @FXML
-    private Label welcomeText0;
     @FXML
     private ComboBox<String> comboBoxType;
     @FXML
     private ComboBox<String> comboBoxLevelDegree;
 
     ObservableList<String> typeList = FXCollections.observableArrayList("Worker", "Engineer");
-    ObservableList<String> lvdegreeList = FXCollections.observableArrayList("Assistant", "Manager", "Back-end", "Front-end", "Full-stack");
-    @FXML
+    ObservableList<String> levelList = FXCollections.observableArrayList("Assistant", "Manager");
+    ObservableList<String> degreeList = FXCollections.observableArrayList("Back-end", "Front-end", "Full-stack");
 
-    protected void onHelloButtonClick() {
-        welcomeText0.setText("Welcome to JavaFX Application!");
-    }
-
+    // Functions
     @FXML
     public void onAddButtonClick(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -63,6 +58,11 @@ public class Controller {
 
     @FXML
     public void comboBoxLevelDegree() {
-        comboBoxLevelDegree.setItems(lvdegreeList);
+        String type = comboBoxType.getValue();
+        if (type.equals("Worker")) {
+            comboBoxLevelDegree.setItems(levelList);
+        } else {
+            comboBoxLevelDegree.setItems(degreeList);
+        }
     }
 }
