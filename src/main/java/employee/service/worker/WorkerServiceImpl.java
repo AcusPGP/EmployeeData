@@ -191,7 +191,7 @@ public class WorkerServiceImpl extends BaseEmployeeServiceImpl implements Worker
 
     public String chooseLevel() {
         System.out.println("Choose level for the worker.");
-        System.out.println("1. Employee");
+        System.out.println("1. Assistant");
         System.out.println("2. Manager");
         System.out.print("Please choose an option: ");
         String option = sc.nextLine().trim();
