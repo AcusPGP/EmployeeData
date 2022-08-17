@@ -3,6 +3,8 @@ package employee.service;
 import employee.pojo.utils.EmployeeConstants;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public abstract class BaseEmployeeServiceImpl implements BaseService {
@@ -164,5 +166,36 @@ public abstract class BaseEmployeeServiceImpl implements BaseService {
             default -> System.out.println("\n" + "Invalid! Please choose an option in the below menu. ");
         }
         return degree;
+    }
+
+    public int suggestId() throws IOException {
+        int num = 0;
+        File file = new File(EmployeeConstants.LIST_PATH);
+        String currentLine;
+        if (file.length() == 0) {
+            num = 1;
+        } else {
+            ArrayList<Integer> ar = new ArrayList<>();
+            BufferedReader reader = new BufferedReader(new FileReader(EmployeeConstants.LIST_PATH));
+            while ((currentLine = reader.readLine()) != null) {
+                String[] array = currentLine.split("@");
+                ar.add(Integer.parseInt(array[0]));
+            }
+            reader.close();
+            int length = Collections.max(ar);
+            if (length == ar.size()) {
+                num = length + 1;
+            } else {
+                for (int i = 1; i <= length; i++) {
+                    if (ar.contains(i)) {
+                        continue;
+                    } else {
+                        num = i;
+                        return num;
+                    }
+                }
+            }
+        }
+        return num;
     }
 }
