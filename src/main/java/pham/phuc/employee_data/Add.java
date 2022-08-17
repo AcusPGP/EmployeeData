@@ -10,17 +10,17 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class Add {
     @FXML
-    private ComboBox<String> comboBoxType;
+    private Label type;
     @FXML
     private ComboBox<String> comboBoxLevelDegree;
 
-    ObservableList<String> typeList = FXCollections.observableArrayList("Worker", "Engineer");
     ObservableList<String> levelList = FXCollections.observableArrayList("Assistant", "Manager");
     ObservableList<String> degreeList = FXCollections.observableArrayList("Back-end", "Front-end", "Full-stack");
 
@@ -30,7 +30,15 @@ public class Add {
     }
 
     @FXML
-    public void onAddReturnClick(ActionEvent event) throws IOException {
+    public void onReturnClick(ActionEvent event) throws IOException {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(Controller.class.getResource("add-option-view.fxml"));
+        Parent addParent = loader.load();
+        Scene addScene = new Scene(addParent);
+        stage.setScene(addScene);
+    }
+
+    public void onMenuClick(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(Controller.class.getResource("hello-view.fxml"));
         Parent addParent = loader.load();
@@ -42,16 +50,11 @@ public class Add {
      * ComboBox (Java)
      */
     @FXML
-    public void comboBoxType() {
-        comboBoxType.setItems(typeList);
-    }
-
-    @FXML
     public void comboBoxLevelDegree() {
-        String type = comboBoxType.getValue();
-        if (type.equals("Worker")) {
+        String temp = type.getText().trim();
+        if (temp.equals("Worker")) {
             comboBoxLevelDegree.setItems(levelList);
-        } else if (type.equals("Engineer")) {
+        } else if (temp.equals("Engineer")) {
             comboBoxLevelDegree.setItems(degreeList);
         }
     }

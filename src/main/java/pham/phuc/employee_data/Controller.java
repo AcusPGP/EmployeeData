@@ -17,7 +17,7 @@ public class Controller {
     @FXML
     public void onAddButtonClick(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(Controller.class.getResource("add-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(Controller.class.getResource("add-option-view.fxml"));
         Parent addParent = loader.load();
         Scene addScene = new Scene(addParent);
         stage.setScene(addScene);
