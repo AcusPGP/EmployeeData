@@ -41,23 +41,22 @@ public class Add extends BaseEmployeeServiceImpl {
     @FXML
     private TableView<Person> table;
     @FXML
-    private TableColumn<Person, Integer> idColumn;
+    private TableColumn idColumn;
     @FXML
-    private TableColumn<Person, String> nameColumn;
+    private TableColumn nameColumn;
     @FXML
-    private TableColumn<Person, Integer> ageColumn;
+    private TableColumn ageColumn;
     @FXML
-    private TableColumn<Person, String> addressColumn;
+    private TableColumn addressColumn;
     @FXML
-    private TableColumn<Person, String> typeColumn;
+    private TableColumn typeColumn;
     @FXML
-    private TableColumn<Person, String> lv_degreeColumn;
+    private TableColumn lv_degreeColumn;
     private String DATA;
 
     ObservableList<String> typeList = FXCollections.observableArrayList("Worker", "Engineer");
     ObservableList<String> levelList = FXCollections.observableArrayList("Assistant", "Manager");
     ObservableList<String> degreeList = FXCollections.observableArrayList("Back-end", "Front-end", "Full-stack");
-    ObservableList<Person> addList;
 
     public void getInfo() {
         String id, name, age, address, level_degree, type;
@@ -72,10 +71,19 @@ public class Add extends BaseEmployeeServiceImpl {
 
     public void onConfirmButtonClick() {
         getInfo();
-        String[] arrayData = DATA.split("@");
-        String confirmInfo = arrayData[0] + " " + arrayData[1] + " " + arrayData[2] + " " + arrayData[3] + " " + arrayData[4] + " " + arrayData[5];
-        //tableAddView();
-        INFO.setText(confirmInfo);
+        if (checkEmptyText().equals("true")) {
+            String[] arrayData = DATA.split("@");
+            String confirmInfo = arrayData[0] + " " + arrayData[1] + " " + arrayData[2] + " " + arrayData[3] + " " + arrayData[4] + " " + arrayData[5];
+            //tableAddView();
+            INFO.setText(confirmInfo);
+        } else {
+            Alert emptyText = new Alert(Alert.AlertType.ERROR, "Empty Information Error", ButtonType.OK);
+            emptyText.initModality(Modality.APPLICATION_MODAL);
+            emptyText.showAndWait();
+            if (emptyText.getResult() == ButtonType.OK) {
+                emptyText.close();
+            }
+        }
     }
 
     public void addInfo() {
@@ -92,42 +100,48 @@ public class Add extends BaseEmployeeServiceImpl {
     }
 
     public void onAddInfoButtonClick(ActionEvent event) throws IOException {
-        Alert addSuccess = new Alert(Alert.AlertType.NONE, "Notification", ButtonType.OK, ButtonType.CANCEL);
-        Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        addSuccess.setContentText("Add Employee's Information successfully!");
-        addSuccess.initModality(Modality.APPLICATION_MODAL);
-        addSuccess.initOwner(stage1);
-        addSuccess.showAndWait();
-
-        if (addSuccess.getResult() == ButtonType.CANCEL) {
-            Stage stage2 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(Controller.class.getResource("add-view.fxml"));
-            Parent addParent = loader.load();
-            Scene addScene = new Scene(addParent);
-            stage2.setScene(addScene);
+        if (DATA == null) {
+            Alert emptyText = new Alert(Alert.AlertType.ERROR, "Missing Steps", ButtonType.OK);
+            emptyText.setContentText("Please press confirm button to see the final output!");
+            emptyText.initModality(Modality.APPLICATION_MODAL);
+            emptyText.showAndWait();
+            if (emptyText.getResult() == ButtonType.OK) {
+                emptyText.close();
+            }
         } else {
-            addInfo();
-            Stage stage2 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(Controller.class.getResource("add-view.fxml"));
-            Parent addParent = loader.load();
-            Scene addScene = new Scene(addParent);
-            stage2.setScene(addScene);
+            Alert addSuccess = new Alert(Alert.AlertType.NONE, "Notification", ButtonType.OK, ButtonType.CANCEL);
+            Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            addSuccess.setContentText("Add Employee's Information successfully!");
+            addSuccess.initModality(Modality.APPLICATION_MODAL);
+            addSuccess.initOwner(stage1);
+            addSuccess.showAndWait();
+
+            if (addSuccess.getResult() == ButtonType.CANCEL) {
+                Stage stage2 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                FXMLLoader loader = new FXMLLoader(Controller.class.getResource("add-view.fxml"));
+                Parent addParent = loader.load();
+                Scene addScene = new Scene(addParent);
+                stage2.setScene(addScene);
+            } else {
+                addInfo();
+                Stage stage2 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                FXMLLoader loader = new FXMLLoader(Controller.class.getResource("add-view.fxml"));
+                Parent addParent = loader.load();
+                Scene addScene = new Scene(addParent);
+                stage2.setScene(addScene);
+            }
         }
     }
 
     public void tableAddView() {
         String[] arrayData = DATA.split("@");
-        if (arrayData[4].equals("Worker")) {
-            addList = FXCollections.observableArrayList(new Worker(Integer.parseInt(arrayData[0]), arrayData[1], Integer.parseInt(arrayData[2]), arrayData[3], arrayData[4], arrayData[5]));
-        } else {
-            addList = FXCollections.observableArrayList(new Engineer(Integer.parseInt(arrayData[0]), arrayData[1], Integer.parseInt(arrayData[2]), arrayData[3], arrayData[4], arrayData[5]));
-        }
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        ageColumn.setCellValueFactory(new PropertyValueFactory<>("age"));
-        addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
-        typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-        lv_degreeColumn.setCellValueFactory(new PropertyValueFactory<>("level"));
+        ObservableList<Person> addList = FXCollections.observableArrayList(new Person(Integer.parseInt(arrayData[0]), arrayData[1], Integer.parseInt(arrayData[2]), arrayData[3], arrayData[4], arrayData[5]));
+        idColumn.setCellValueFactory(new PropertyValueFactory<Person, Integer>("id"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<Person, String>("name"));
+        ageColumn.setCellValueFactory(new PropertyValueFactory<Person, Integer>("age"));
+        addressColumn.setCellValueFactory(new PropertyValueFactory<Person, String>("address"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<Person, String>("type"));
+        lv_degreeColumn.setCellValueFactory(new PropertyValueFactory<Person, String>("level"));
         table.setItems(addList);
     }
 
@@ -139,6 +153,18 @@ public class Add extends BaseEmployeeServiceImpl {
         return info;
     }
 
+    public String checkEmptyText() {
+        String isEmpty = "true";
+        String[] checkEmptyText = DATA.split("@");
+        for (String s : checkEmptyText) {
+            if (s.equals("null")) {
+                isEmpty = "false";
+                return isEmpty;
+            }
+        }
+        return isEmpty;
+    }
+
     public void idSuggestion() throws IOException {
         int suggestID = suggestId();
         ID.setText(String.valueOf(suggestID));
@@ -147,8 +173,8 @@ public class Add extends BaseEmployeeServiceImpl {
     public void checkIDTextField(MouseEvent event) throws IOException {
         String id = ID.getText();
         int result = checkId(id);
-        if (result == - 1) {
-            Alert duplicateIDError = new Alert(Alert.AlertType.ERROR, "Duplicated ID Error" ,ButtonType.OK);
+        if (result == -1) {
+            Alert duplicateIDError = new Alert(Alert.AlertType.ERROR, "Duplicated ID Error", ButtonType.OK);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             duplicateIDError.setContentText("This ID " + id + " is already had. Please try another id.");
             duplicateIDError.initModality(Modality.APPLICATION_MODAL);
@@ -207,8 +233,8 @@ public class Add extends BaseEmployeeServiceImpl {
         comboBoxType.setItems(typeList);
         String id = ID.getText();
         int result = checkId(id);
-        if (result == - 1) {
-            Alert duplicateIDError = new Alert(Alert.AlertType.ERROR, "Duplicated ID Error" ,ButtonType.OK);
+        if (result == -1) {
+            Alert duplicateIDError = new Alert(Alert.AlertType.ERROR, "Duplicated ID Error", ButtonType.OK);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             duplicateIDError.setContentText("This ID " + id + " is already had. Please try another id.");
             duplicateIDError.initModality(Modality.APPLICATION_MODAL);
@@ -230,8 +256,8 @@ public class Add extends BaseEmployeeServiceImpl {
         }
         String id = ID.getText();
         int result = checkId(id);
-        if (result == - 1) {
-            Alert duplicateIDError = new Alert(Alert.AlertType.ERROR, "Duplicated ID Error" ,ButtonType.OK);
+        if (result == -1) {
+            Alert duplicateIDError = new Alert(Alert.AlertType.ERROR, "Duplicated ID Error", ButtonType.OK);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             duplicateIDError.setContentText("This ID " + id + " is already had. Please try another id.");
             duplicateIDError.initModality(Modality.APPLICATION_MODAL);
