@@ -69,6 +69,14 @@ public class Add extends BaseEmployeeServiceImpl {
         DATA = id + "@" + name + "@" + age + "@" + address + "@" + type + "@" + level_degree;
     }
 
+    public String checkInfo(String info) {
+        String temp = "";
+        if (info.equals(temp)) {
+            info = "null";
+        }
+        return info;
+    }
+
     public void onConfirmButtonClick() {
         getInfo();
         if (checkEmptyText().equals("true")) {
@@ -86,17 +94,16 @@ public class Add extends BaseEmployeeServiceImpl {
         }
     }
 
-    public void addInfo() {
-        String[] arrayData = DATA.split("@");
-        if (arrayData[4].equals("Worker")) {
-            WorkerServiceImpl worker = new WorkerServiceImpl();
-            Worker newWorker = new Worker(Integer.parseInt(arrayData[0]), arrayData[1], Integer.parseInt(arrayData[2]), arrayData[3], arrayData[4], arrayData[5]);
-            worker.addToF(newWorker);
-        } else {
-            EngineerServiceImpl engineer = new EngineerServiceImpl();
-            Engineer newEngineer = new Engineer(Integer.parseInt(arrayData[0]), arrayData[1], Integer.parseInt(arrayData[2]), arrayData[3], arrayData[4], arrayData[5]);
-            engineer.addToF(newEngineer);
+    public String checkEmptyText() {
+        String isEmpty = "true";
+        String[] checkEmptyText = DATA.split("@");
+        for (String s : checkEmptyText) {
+            if (s.equals("null")) {
+                isEmpty = "false";
+                return isEmpty;
+            }
         }
+        return isEmpty;
     }
 
     public void onAddInfoButtonClick(ActionEvent event) throws IOException {
@@ -133,6 +140,19 @@ public class Add extends BaseEmployeeServiceImpl {
         }
     }
 
+    public void addInfo() {
+        String[] arrayData = DATA.split("@");
+        if (arrayData[4].equals("Worker")) {
+            WorkerServiceImpl worker = new WorkerServiceImpl();
+            Worker newWorker = new Worker(Integer.parseInt(arrayData[0]), arrayData[1], Integer.parseInt(arrayData[2]), arrayData[3], arrayData[4], arrayData[5]);
+            worker.addToF(newWorker);
+        } else {
+            EngineerServiceImpl engineer = new EngineerServiceImpl();
+            Engineer newEngineer = new Engineer(Integer.parseInt(arrayData[0]), arrayData[1], Integer.parseInt(arrayData[2]), arrayData[3], arrayData[4], arrayData[5]);
+            engineer.addToF(newEngineer);
+        }
+    }
+
     public void tableAddView() {
         String[] arrayData = DATA.split("@");
         ObservableList<Person> addList = FXCollections.observableArrayList(new Person(Integer.parseInt(arrayData[0]), arrayData[1], Integer.parseInt(arrayData[2]), arrayData[3], arrayData[4], arrayData[5]));
@@ -143,26 +163,6 @@ public class Add extends BaseEmployeeServiceImpl {
         typeColumn.setCellValueFactory(new PropertyValueFactory<Person, String>("type"));
         lv_degreeColumn.setCellValueFactory(new PropertyValueFactory<Person, String>("level"));
         table.setItems(addList);
-    }
-
-    public String checkInfo(String info) {
-        String temp = "";
-        if (info.equals(temp)) {
-            info = "null";
-        }
-        return info;
-    }
-
-    public String checkEmptyText() {
-        String isEmpty = "true";
-        String[] checkEmptyText = DATA.split("@");
-        for (String s : checkEmptyText) {
-            if (s.equals("null")) {
-                isEmpty = "false";
-                return isEmpty;
-            }
-        }
-        return isEmpty;
     }
 
     public void idSuggestion() throws IOException {
