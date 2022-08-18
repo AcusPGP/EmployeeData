@@ -51,13 +51,12 @@ public class WorkerServiceImpl extends BaseEmployeeServiceImpl implements Worker
         }
     }
 
-
     private boolean checkFileExist() {
         File file = new File(EmployeeConstants.LIST_PATH);
         return file.exists();
     }
 
-    private void addToF(Worker worker) {
+    public void addToF(Worker worker) {
         FileWriter myList = null;
         try {
             if (checkFileExist()) {

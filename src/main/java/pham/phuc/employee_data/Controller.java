@@ -49,4 +49,13 @@ public class Controller {
             exitAlert.close();
         }
     }
+
+    public void onCommentButtonClick(ActionEvent event) throws IOException {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(Controller.class.getResource("note-view.fxml"));
+        Parent addParent = loader.load();
+        Scene addScene = new Scene(addParent);
+        stage.setScene(addScene);
+    }
+
 }

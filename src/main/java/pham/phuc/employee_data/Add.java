@@ -1,6 +1,11 @@
 package pham.phuc.employee_data;
 
+import employee.pojo.Engineer;
+import employee.pojo.Person;
+import employee.pojo.Worker;
 import employee.service.BaseEmployeeServiceImpl;
+import employee.service.engineer.EngineerServiceImpl;
+import employee.service.worker.WorkerServiceImpl;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,6 +16,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -31,32 +37,105 @@ public class Add extends BaseEmployeeServiceImpl {
     private ComboBox<String> comboBoxLevelDegree;
     @FXML
     private ComboBox<String> comboBoxType;
+    @FXML
+    private TableView<Person> table;
+    @FXML
+    private TableColumn<Person, Integer> idColumn;
+    @FXML
+    private TableColumn<Person, String> nameColumn;
+    @FXML
+    private TableColumn<Person, Integer> ageColumn;
+    @FXML
+    private TableColumn<Person, String> addressColumn;
+    @FXML
+    private TableColumn<Person, String> typeColumn;
+    @FXML
+    private TableColumn<Person, String> lv_degreeColumn;
+    private String DATA;
 
     ObservableList<String> typeList = FXCollections.observableArrayList("Worker", "Engineer");
     ObservableList<String> levelList = FXCollections.observableArrayList("Assistant", "Manager");
     ObservableList<String> degreeList = FXCollections.observableArrayList("Back-end", "Front-end", "Full-stack");
+    ObservableList<Person> addList;
 
-    public String getInfo() {
+    public void getInfo() {
         String id, name, age, address, level_degree, type;
         id = checkInfo(ID.getText().trim());
         name = checkInfo(NAME.getText().trim());
         age = checkInfo(AGE.getText().trim());
         address = checkInfo(ADDRESS.getText().trim());
-        type = comboBoxType.getValue().trim();
-        level_degree = comboBoxLevelDegree.getValue().trim();
-        String info = id + " " + name + " " + age + " " + address + " " + type + " " + level_degree;
-        INFO.setText(info);
-        return info;
+        type = comboBoxType.getValue();
+        level_degree = comboBoxLevelDegree.getValue();
+        DATA = id + "@" + name + "@" + age + "@" + address + "@" + type + "@" + level_degree;
+    }
+
+    public void onConfirmButtonClick() {
+        getInfo();
+        String[] arrayData = DATA.split("@");
+        String confirmInfo = arrayData[0] + " " + arrayData[1] + " " + arrayData[2] + " " + arrayData[3] + " " + arrayData[4] + " " + arrayData[5];
+        tableAddView();
+        INFO.setText(confirmInfo);
+    }
+
+    public void addInfo() {
+        String[] arrayData = DATA.split("@");
+        if (arrayData[4].equals("Worker")) {
+            WorkerServiceImpl worker = new WorkerServiceImpl();
+            Worker newWorker = new Worker(Integer.parseInt(arrayData[0]), arrayData[1], Integer.parseInt(arrayData[2]), arrayData[3], arrayData[4], arrayData[5]);
+            worker.addToF(newWorker);
+        } else {
+            EngineerServiceImpl engineer = new EngineerServiceImpl();
+            Engineer newEngineer = new Engineer(Integer.parseInt(arrayData[0]), arrayData[1], Integer.parseInt(arrayData[2]), arrayData[3], arrayData[4], arrayData[5]);
+            engineer.addToF(newEngineer);
+        }
+    }
+
+    public void onAddInfoButtonClick(ActionEvent event) throws IOException {
+        Alert addSuccess = new Alert(Alert.AlertType.NONE, "Notification", ButtonType.OK, ButtonType.CANCEL);
+        Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        addSuccess.setContentText("Add Employee's Information successfully!");
+        addSuccess.initModality(Modality.APPLICATION_MODAL);
+        addSuccess.initOwner(stage1);
+        addSuccess.showAndWait();
+
+        if (addSuccess.getResult() == ButtonType.CANCEL) {
+            Stage stage2 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(Controller.class.getResource("add-view.fxml"));
+            Parent addParent = loader.load();
+            Scene addScene = new Scene(addParent);
+            stage2.setScene(addScene);
+        } else {
+            addInfo();
+            Stage stage2 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(Controller.class.getResource("add-view.fxml"));
+            Parent addParent = loader.load();
+            Scene addScene = new Scene(addParent);
+            stage2.setScene(addScene);
+        }
+    }
+
+    public void tableAddView() {
+        String[] arrayData = DATA.split("@");
+        if (arrayData[4].equals("Worker")) {
+            addList = FXCollections.observableArrayList(new Worker(Integer.parseInt(arrayData[0]), arrayData[1], Integer.parseInt(arrayData[2]), arrayData[3], arrayData[4], arrayData[5]));
+        } else {
+            addList = FXCollections.observableArrayList(new Engineer(Integer.parseInt(arrayData[0]), arrayData[1], Integer.parseInt(arrayData[2]), arrayData[3], arrayData[4], arrayData[5]));
+        }
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        ageColumn.setCellValueFactory(new PropertyValueFactory<>("age"));
+        addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+        lv_degreeColumn.setCellValueFactory(new PropertyValueFactory<>("level"));
+        table.setItems(addList);
     }
 
     public String checkInfo(String info) {
         String temp = "";
         if (info.equals(temp)) {
             info = "null";
-            return info;
-        } else {
-            return info;
         }
+        return info;
     }
 
     public void idSuggestion() throws IOException {
@@ -79,7 +158,7 @@ public class Add extends BaseEmployeeServiceImpl {
         }
     }
 
-    public void onReturnClick(ActionEvent event) throws IOException {
+    public void onReturnButtonClick(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(Controller.class.getResource("hello-view.fxml"));
         Parent addParent = loader.load();
@@ -87,9 +166,17 @@ public class Add extends BaseEmployeeServiceImpl {
         stage.setScene(addScene);
     }
 
-    public void onMenuClick(ActionEvent event) throws IOException {
+    public void onMenuButtonClick(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(Controller.class.getResource("hello-view.fxml"));
+        Parent addParent = loader.load();
+        Scene addScene = new Scene(addParent);
+        stage.setScene(addScene);
+    }
+
+    public void onCommentButtonClick(ActionEvent event) throws IOException {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(Controller.class.getResource("note-view.fxml"));
         Parent addParent = loader.load();
         Scene addScene = new Scene(addParent);
         stage.setScene(addScene);

@@ -56,7 +56,7 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
         return file.exists();
     }
 
-    private void addToF(Engineer en) {
+    public void addToF(Engineer en) {
         FileWriter myList = null;
         try {
             if (checkFileExist()) {
