@@ -54,10 +54,12 @@ public class Add extends BaseEmployeeServiceImpl {
     private TableColumn lv_degreeColumn;
     private String DATA;
 
+    // ObservableList 
     ObservableList<String> typeList = FXCollections.observableArrayList("Worker", "Engineer");
     ObservableList<String> levelList = FXCollections.observableArrayList("Assistant", "Manager");
     ObservableList<String> degreeList = FXCollections.observableArrayList("Back-end", "Front-end", "Full-stack");
 
+    // Getting input information from the user: Lấy thông tin người dùng nhập vào
     public void getInfo() {
         String id, name, age, address, level_degree, type;
         id = checkInfo(ID.getText().trim());
@@ -69,6 +71,8 @@ public class Add extends BaseEmployeeServiceImpl {
         DATA = id + "@" + name + "@" + age + "@" + address + "@" + type + "@" + level_degree;
     }
 
+    // Checking if there is any empty Text Field in the stage - filling the empty Text Field with "null"
+    // Kiểm tra thông tin còn trống - thêm vào các thông tin còn trống "null"
     public String checkInfo(String info) {
         String temp = "";
         if (info.equals(temp)) {
@@ -77,6 +81,8 @@ public class Add extends BaseEmployeeServiceImpl {
         return info;
     }
 
+    // Confirming the user's information, display and output the final adding information text for user before adding section
+    // Đưa ra thông tin cuối cùng của người dùng trước khi thêm vào danh sách
     public void onConfirmButtonClick() {
         getInfo();
         if (checkEmptyText().equals("true")) {
@@ -94,6 +100,8 @@ public class Add extends BaseEmployeeServiceImpl {
         }
     }
 
+    // Checking if theres is a string "null" in the final output of user's information
+    // Kiểm tra xem còn thông tin nào thiếu trong thông tin cuối cùng của người dùng hay không
     public String checkEmptyText() {
         String isEmpty = "true";
         String[] checkEmptyText = DATA.split("@");
@@ -106,6 +114,9 @@ public class Add extends BaseEmployeeServiceImpl {
         return isEmpty;
     }
 
+    // Adding user's information to the list - Checking if final output user's information is empty at the beginning (exception)
+    // Lưu thông tin người dùng - Kiểm tra ngay lúc vào chương trình nhập thông tin nếu người dùng có bấm Add ngay lúc đầu thì báo lỗi bắt người dùng phải
+    // nhập thông tin hoặc bấm Confirm để tiếp tục bước kiểm tra các trường hợp ngoại lệ tiếp theo.
     public void onAddInfoButtonClick(ActionEvent event) throws IOException {
         if (DATA == null) {
             Alert emptyText = new Alert(Alert.AlertType.ERROR, "Missing Steps", ButtonType.OK);
@@ -139,7 +150,6 @@ public class Add extends BaseEmployeeServiceImpl {
             }
         }
     }
-
     public void addInfo() {
         String[] arrayData = DATA.split("@");
         if (arrayData[4].equals("Worker")) {
@@ -153,6 +163,7 @@ public class Add extends BaseEmployeeServiceImpl {
         }
     }
 
+    // Display a table of adding information for user
     public void tableAddView() {
         String[] arrayData = DATA.split("@");
         ObservableList<Person> addList = FXCollections.observableArrayList(new Person(Integer.parseInt(arrayData[0]), arrayData[1], Integer.parseInt(arrayData[2]), arrayData[3], arrayData[4], arrayData[5]));
@@ -165,11 +176,13 @@ public class Add extends BaseEmployeeServiceImpl {
         table.setItems(addList);
     }
 
+    // Suggest an ID for the user
     public void idSuggestion() throws IOException {
         int suggestID = suggestId();
         ID.setText(String.valueOf(suggestID));
     }
 
+    // Checking if the ID is already had in the list - if it is true, alert the user to input a new ID again.
     public void checkIDTextField(MouseEvent event) throws IOException {
         String id = ID.getText();
         int result = checkId(id);
@@ -187,6 +200,7 @@ public class Add extends BaseEmployeeServiceImpl {
         }
     }
 
+    // Exit
     public void onExitButtonCLick(ActionEvent event) {
         Alert exitAlert = new Alert(Alert.AlertType.CONFIRMATION, "Confirmation", ButtonType.OK, ButtonType.CANCEL);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -202,6 +216,7 @@ public class Add extends BaseEmployeeServiceImpl {
         }
     }
 
+    // Return
     public void onReturnButtonClick(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(Controller.class.getResource("hello-view.fxml"));
@@ -210,6 +225,7 @@ public class Add extends BaseEmployeeServiceImpl {
         stage.setScene(addScene);
     }
 
+    // Menu
     public void onMenuButtonClick(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(Controller.class.getResource("hello-view.fxml"));
@@ -218,6 +234,7 @@ public class Add extends BaseEmployeeServiceImpl {
         stage.setScene(addScene);
     }
 
+    // Comment
     public void onCommentButtonClick(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(Controller.class.getResource("note-view.fxml"));
