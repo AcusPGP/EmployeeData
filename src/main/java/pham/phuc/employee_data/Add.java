@@ -38,26 +38,29 @@ public class Add extends BaseEmployeeServiceImpl {
     private ComboBox<String> comboBoxLevelDegree;
     @FXML
     private ComboBox<String> comboBoxType;
+    private String DATA;
     @FXML
     private TableView<Person> table;
     @FXML
-    private TableColumn idColumn;
+    private TableColumn<Person, Integer> idColumn;
     @FXML
-    private TableColumn nameColumn;
+    private TableColumn<Person, String> nameColumn;
     @FXML
-    private TableColumn ageColumn;
+    private TableColumn<Person, Integer> ageColumn;
     @FXML
-    private TableColumn addressColumn;
+    private TableColumn<Person, String> addressColumn;
     @FXML
-    private TableColumn typeColumn;
+    private TableColumn<Person, String> typeColumn;
     @FXML
-    private TableColumn lv_degreeColumn;
-    private String DATA;
+    private TableColumn<Person, String> lv_degreeColumn;
 
-    // ObservableList 
+
+    // ObservableList
     ObservableList<String> typeList = FXCollections.observableArrayList("Worker", "Engineer");
     ObservableList<String> levelList = FXCollections.observableArrayList("Assistant", "Manager");
     ObservableList<String> degreeList = FXCollections.observableArrayList("Back-end", "Front-end", "Full-stack");
+
+    ObservableList<Person> addList;
 
     // Getting input information from the user: Lấy thông tin người dùng nhập vào
     public void getInfo() {
@@ -88,7 +91,7 @@ public class Add extends BaseEmployeeServiceImpl {
         if (checkEmptyText().equals("true")) {
             String[] arrayData = DATA.split("@");
             String confirmInfo = arrayData[0] + " " + arrayData[1] + " " + arrayData[2] + " " + arrayData[3] + " " + arrayData[4] + " " + arrayData[5];
-            //tableAddView();
+            tableAddView();
             INFO.setText(confirmInfo);
         } else {
             Alert emptyText = new Alert(Alert.AlertType.ERROR, "Empty Information Error", ButtonType.OK);
@@ -150,6 +153,7 @@ public class Add extends BaseEmployeeServiceImpl {
             }
         }
     }
+
     public void addInfo() {
         String[] arrayData = DATA.split("@");
         if (arrayData[4].equals("Worker")) {
@@ -166,7 +170,7 @@ public class Add extends BaseEmployeeServiceImpl {
     // Display a table of adding information for user
     public void tableAddView() {
         String[] arrayData = DATA.split("@");
-        ObservableList<Person> addList = FXCollections.observableArrayList(new Person(Integer.parseInt(arrayData[0]), arrayData[1], Integer.parseInt(arrayData[2]), arrayData[3], arrayData[4], arrayData[5]));
+        addList = FXCollections.observableArrayList(new Person(Integer.parseInt(arrayData[0]), arrayData[1], Integer.parseInt(arrayData[2]), arrayData[3], arrayData[4], arrayData[5]));
         idColumn.setCellValueFactory(new PropertyValueFactory<Person, Integer>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<Person, String>("name"));
         ageColumn.setCellValueFactory(new PropertyValueFactory<Person, Integer>("age"));

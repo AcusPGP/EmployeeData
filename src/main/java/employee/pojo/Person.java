@@ -1,5 +1,7 @@
 package employee.pojo;
 
+import javafx.beans.property.StringProperty;
+
 public class Person implements IGeneral {
     private String name;
     private int id;
@@ -9,7 +11,6 @@ public class Person implements IGeneral {
     private String level;
 
     public Person(int id, String name, int age, String address, String type, String level) {
-        super();
         this.name = name;
         this.age = age;
         this.address = address;
