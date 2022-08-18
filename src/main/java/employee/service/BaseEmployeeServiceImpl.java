@@ -220,4 +220,36 @@ public abstract class BaseEmployeeServiceImpl implements BaseService {
             return result;
         }
     }
+
+    public int checkIfIsInteger(String num) {
+        int temp = 0;
+        String nothing = "";
+        if (num.equals(nothing)) {
+            return temp;
+        } else {
+            try {
+                Integer.parseInt(num);
+                return temp;
+            } catch (NumberFormatException e) {
+                temp = -1;
+                return temp;
+            }
+        }
+    }
+
+    public int checkAgeRange(String age) {
+        int temp = 0;
+        String nothing = "";
+        if (age.equals(nothing)) {
+            return temp;
+        } else {
+            int checkAge = Integer.parseInt(age);
+            if (checkAge >= 0 && checkAge <= 100) {
+                return temp;
+            } else {
+                temp = -1;
+                return temp;
+            }
+        }
+    }
 }

@@ -141,6 +141,10 @@
                         <Image url="@photo/Return.png" />
                     </image>
                 </ImageView>
+            <Label fx:id="ID_ADVICE" layoutX="445.0" layoutY="67.0" prefHeight="24.0" prefWidth="216.0" textFill="RED">
+               <font>
+                  <Font size="11.0" />
+               </font></Label>
             </children>
         </Pane>
     </children>
