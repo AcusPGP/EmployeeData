@@ -17,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -73,7 +74,7 @@ public class Add extends BaseEmployeeServiceImpl {
         getInfo();
         String[] arrayData = DATA.split("@");
         String confirmInfo = arrayData[0] + " " + arrayData[1] + " " + arrayData[2] + " " + arrayData[3] + " " + arrayData[4] + " " + arrayData[5];
-        tableAddView();
+        //tableAddView();
         INFO.setText(confirmInfo);
     }
 
@@ -143,6 +144,23 @@ public class Add extends BaseEmployeeServiceImpl {
         ID.setText(String.valueOf(suggestID));
     }
 
+    public void checkIDTextField(MouseEvent event) throws IOException {
+        String id = ID.getText();
+        int result = checkId(id);
+        if (result == - 1) {
+            Alert duplicateIDError = new Alert(Alert.AlertType.ERROR, "Duplicated ID Error" ,ButtonType.OK);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            duplicateIDError.setContentText("This ID " + id + " is already had. Please try another id.");
+            duplicateIDError.initModality(Modality.APPLICATION_MODAL);
+            duplicateIDError.initOwner(stage);
+            duplicateIDError.showAndWait();
+            if (duplicateIDError.getResult() == ButtonType.OK) {
+                ID.clear();
+                ID.setPromptText("Please input your ID");
+            }
+        }
+    }
+
     public void onExitButtonCLick(ActionEvent event) {
         Alert exitAlert = new Alert(Alert.AlertType.CONFIRMATION, "Confirmation", ButtonType.OK, ButtonType.CANCEL);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -185,16 +203,44 @@ public class Add extends BaseEmployeeServiceImpl {
     /**
      * ComboBox (Java)
      */
-    public void comboBoxType() {
+    public void comboBoxType(MouseEvent event) throws IOException {
         comboBoxType.setItems(typeList);
+        String id = ID.getText();
+        int result = checkId(id);
+        if (result == - 1) {
+            Alert duplicateIDError = new Alert(Alert.AlertType.ERROR, "Duplicated ID Error" ,ButtonType.OK);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            duplicateIDError.setContentText("This ID " + id + " is already had. Please try another id.");
+            duplicateIDError.initModality(Modality.APPLICATION_MODAL);
+            duplicateIDError.initOwner(stage);
+            duplicateIDError.showAndWait();
+            if (duplicateIDError.getResult() == ButtonType.OK) {
+                ID.clear();
+                ID.setPromptText("Please input your ID");
+            }
+        }
     }
 
-    public void comboBoxLevelDegree() {
+    public void comboBoxLevelDegree(MouseEvent event) throws IOException {
         String temp = comboBoxType.getValue().trim();
         if (temp.equals("Worker")) {
             comboBoxLevelDegree.setItems(levelList);
         } else if (temp.equals("Engineer")) {
             comboBoxLevelDegree.setItems(degreeList);
+        }
+        String id = ID.getText();
+        int result = checkId(id);
+        if (result == - 1) {
+            Alert duplicateIDError = new Alert(Alert.AlertType.ERROR, "Duplicated ID Error" ,ButtonType.OK);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            duplicateIDError.setContentText("This ID " + id + " is already had. Please try another id.");
+            duplicateIDError.initModality(Modality.APPLICATION_MODAL);
+            duplicateIDError.initOwner(stage);
+            duplicateIDError.showAndWait();
+            if (duplicateIDError.getResult() == ButtonType.OK) {
+                ID.clear();
+                ID.setPromptText("Please input your ID");
+            }
         }
     }
 

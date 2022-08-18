@@ -108,28 +108,6 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
         }
     }
 
-    public int checkId(String id) throws IOException {
-        int result = 0;
-        File check = new File(EmployeeConstants.LIST_PATH);
-        if (check.length() == 0) {
-            return result;
-        } else {
-            BufferedReader reader = new BufferedReader(new FileReader(check));
-            String currentLine;
-            while ((currentLine = reader.readLine()) != null) {
-                String trimmedLine = currentLine.trim();
-                String[] array = trimmedLine.split("@");
-                if (array[0].equals(id)) {
-                    result = -1;
-                    System.out.println("This ID " + "'" + id + "'" + " is aLready had. Please try another id." + "\n");
-                    break;
-                }
-            }
-            reader.close();
-            return result;
-        }
-    }
-
     public String inputName() {
         System.out.print(EmployeeConstants.INPUT_NAME);
         return sc.nextLine();
