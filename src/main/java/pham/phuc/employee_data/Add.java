@@ -277,11 +277,7 @@ public class Add extends BaseEmployeeServiceImpl {
                 addSuccess.showAndWait();
 
                 if (addSuccess.getResult() == ButtonType.CANCEL) {
-                    Stage stage2 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    FXMLLoader loader = new FXMLLoader(Controller.class.getResource("add-view.fxml"));
-                    Parent addParent = loader.load();
-                    Scene addScene = new Scene(addParent);
-                    stage2.setScene(addScene);
+                    addSuccess.close();
                 } else {
                     addInfo();
                     Stage stage2 = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -423,6 +419,11 @@ public class Add extends BaseEmployeeServiceImpl {
 
     @Override
     public void show() throws IOException {
+
+    }
+
+    @Override
+    public void delete() throws IOException {
 
     }
 }

@@ -92,11 +92,9 @@ public abstract class BaseEmployeeServiceImpl implements BaseService {
     }
 
 
-    public void delete() throws IOException {
-        System.out.print(EmployeeConstants.INPUT_ID_TO_DELETE);
-        String id = sc.nextLine().trim();
+    public void delete(String id) throws IOException {
         File inputF = new File(EmployeeConstants.LIST_PATH);
-        File tempF = new File(EmployeeConstants.LIST_PATH);
+        File tempF = new File("temp.txt");
         BufferedReader reader = new BufferedReader(new FileReader(inputF));
         BufferedWriter writer = new BufferedWriter(new FileWriter(tempF));
         String currentLine;

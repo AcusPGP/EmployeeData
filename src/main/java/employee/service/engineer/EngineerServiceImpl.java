@@ -51,6 +51,11 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
         }
     }
 
+    @Override
+    public void delete() throws IOException {
+
+    }
+
     private boolean checkFileExist() {
         File file = new File(EmployeeConstants.LIST_PATH);
         return file.exists();

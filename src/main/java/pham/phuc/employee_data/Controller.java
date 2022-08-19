@@ -12,11 +12,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -26,7 +24,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Controller implements Initializable {
+public class Controller extends Application implements Initializable {
+    @FXML
+    private Label MENU;
+    @FXML
+    private ContextMenu popUpMenu;
     public TableView<Person> realtimeDataTable;
     @FXML
     private TableColumn<Person, Integer> idColumn;
@@ -91,7 +93,6 @@ public class Controller implements Initializable {
     }
 
     //Exit
-    @FXML
     public void onExitButtonCLick(ActionEvent event) {
         Alert exitAlert = new Alert(Alert.AlertType.CONFIRMATION, "Confirmation", ButtonType.OK, ButtonType.CANCEL);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -114,5 +115,19 @@ public class Controller implements Initializable {
         Parent addParent = loader.load();
         Scene addScene = new Scene(addParent);
         stage.setScene(addScene);
+    }
+
+    //Delete
+    public void onDeleteButtonClick(ActionEvent event) throws IOException {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(Controller.class.getResource("delete-view.fxml"));
+        Parent addParent = loader.load();
+        Scene addScene = new Scene(addParent);
+        stage.setScene(addScene);
+    }
+
+    //Pop menu
+    public void popMenuButtonClick(MouseEvent event) {
+        popUpMenu.show(MENU, event.getScreenX(), event.getScreenY());
     }
 }
