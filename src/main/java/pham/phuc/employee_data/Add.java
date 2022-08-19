@@ -64,7 +64,6 @@ public class Add extends BaseEmployeeServiceImpl {
     ObservableList<String> typeList = FXCollections.observableArrayList("Worker", "Engineer");
     ObservableList<String> levelList = FXCollections.observableArrayList("Assistant", "Manager");
     ObservableList<String> degreeList = FXCollections.observableArrayList("Back-end", "Front-end", "Full-stack");
-
     ObservableList<Person> addList;
 
     /**
