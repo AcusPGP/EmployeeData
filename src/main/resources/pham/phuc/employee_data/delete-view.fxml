@@ -39,12 +39,12 @@
                 <Line endX="710.0" layoutX="99.0" layoutY="29.0" startX="-98.0" />
                 <ComboBox fx:id="showOption" layoutX="102.0" layoutY="86.0" onMouseClicked="#comboBoxShowOption" prefHeight="30.0" prefWidth="130.0" />
                 <Line endX="100.0" endY="-12.5" layoutX="280.0" layoutY="140.0" startX="100.0" startY="-65.0" />
-                <Button layoutX="388.0" layoutY="86.0" mnemonicParsing="false" onAction="#onSearchIDButtonClick" prefHeight="30.0" prefWidth="130.0" text="Search ID" textFill="BLUE">
+                <Button layoutX="388.0" layoutY="86.0" mnemonicParsing="false" onAction="#onSearchIDButtonClick" prefHeight="30.0" prefWidth="94.0" text="Search ID" textFill="BLUE">
                     <font>
                         <Font name="Helvetica" size="15.0" />
                     </font>
                 </Button>
-                <TextField fx:id="idSearch" layoutX="528.0" layoutY="86.0" prefHeight="30.0" prefWidth="130.0" promptText="Please input an ID" />
+                <TextField fx:id="idSearch" layoutX="490.0" layoutY="86.0" prefHeight="30.0" prefWidth="80.0" promptText="ID" />
                 <TableView fx:id="listTableView" layoutX="18.0" layoutY="145.0" prefHeight="318.0" prefWidth="774.0">
                     <columns>
                         <TableColumn fx:id="idColumn" prefWidth="60.0" text="ID" />
@@ -97,7 +97,12 @@
                         <Image url="@photo/Comment.png" />
                     </image>
                 </ImageView>
-            <Button layoutX="668.0" layoutY="85.0" mnemonicParsing="false" onAction="#onDeleteButtonClick" prefHeight="30.0" prefWidth="130.0" text="Delete" textFill="BLUE">
+            <Button layoutX="578.0" layoutY="86.0" mnemonicParsing="false" onAction="#onDeleteByIDButtonClick" prefHeight="30.0" prefWidth="107.0" text="Delete by ID" textFill="BLUE">
+               <font>
+                  <Font name="Helvetica" size="15.0" />
+               </font>
+            </Button>
+            <Button layoutX="693.0" layoutY="86.0" mnemonicParsing="false" onAction="#onDeleteRowButtonClick" prefHeight="30.0" prefWidth="107.0" text="Delete Row" textFill="BLUE">
                <font>
                   <Font name="Helvetica" size="15.0" />
                </font>

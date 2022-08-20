@@ -1,7 +1,5 @@
 package employee.pojo;
 
-import javafx.beans.property.StringProperty;
-
 public class Person implements IGeneral {
     private String name;
     private int id;
@@ -78,4 +76,10 @@ public class Person implements IGeneral {
         return id + "@" + name + "@" + age + "@" + address + "@" + type + "@" + level;
     }
 
+    public void setNewId(String newId) {
+        this.id = Integer.parseInt(newId);
+    }
+    public void setNewAge(String newAge) {
+        this.age = Integer.parseInt(newAge);
+    }
 }

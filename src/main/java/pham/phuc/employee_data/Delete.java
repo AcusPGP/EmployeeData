@@ -131,7 +131,7 @@ public class Delete extends BaseEmployeeServiceImpl {
     /**
      * Delete employee's information
      */
-    public void onDeleteButtonClick(ActionEvent event) throws IOException {
+    public void onDeleteByIDButtonClick(ActionEvent event) throws IOException {
         if (idSearch.getText().equals("")) {
             Alert emptyShowOption = new Alert(Alert.AlertType.ERROR, "Empty Show Option", ButtonType.OK);
             emptyShowOption.setTitle("Option Error");
@@ -160,6 +160,32 @@ public class Delete extends BaseEmployeeServiceImpl {
                     String[] data = currentLine.split("@");
                     showTableView(data);
                 }
+            }
+        }
+    }
+
+    public void onDeleteRowButtonClick(ActionEvent event) throws IOException {
+        Alert deleteSuccess = new Alert(Alert.AlertType.NONE, "Notification", ButtonType.OK, ButtonType.CANCEL);
+        Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        deleteSuccess.setContentText("Are you sure want to delete this?");
+        deleteSuccess.initModality(Modality.APPLICATION_MODAL);
+        deleteSuccess.initOwner(stage1);
+        deleteSuccess.showAndWait();
+
+        if (deleteSuccess.getResult() == ButtonType.CANCEL) {
+            deleteSuccess.close();
+        } else {
+            String val = String.valueOf(listTableView.getSelectionModel().getSelectedItems());
+            String arr = val.substring(1, val.length() - 1);
+            String[] selectedID = arr.split("@");
+            delete(selectedID[0]);
+            listTableView.getItems().removeAll(listTableView.getSelectionModel().getSelectedItems());
+            listTableView.getItems().clear();
+            BufferedReader reader = new BufferedReader(new FileReader(EmployeeConstants.LIST_PATH));
+            String currentLine;
+            while ((currentLine = reader.readLine()) != null) {
+                String[] data = currentLine.split("@");
+                showTableView(data);
             }
         }
     }

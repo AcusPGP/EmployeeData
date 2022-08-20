@@ -58,7 +58,7 @@
                             <Font name="Helvetica" size="15.0" />
                         </font>
                     </Button>
-                    <Button layoutX="73.0" layoutY="210.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" text="Edit" textFill="PURPLE">
+                    <Button layoutX="73.0" layoutY="210.0" mnemonicParsing="false" onAction="#onEditButtonClick" prefHeight="30.0" prefWidth="130.0" text="Edit" textFill="PURPLE">
                         <font>
                             <Font name="Helvetica" size="15.0" />
                         </font>

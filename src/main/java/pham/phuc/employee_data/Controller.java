@@ -117,6 +117,15 @@ public class Controller extends Application implements Initializable {
         stage.setScene(addScene);
     }
 
+    //Edit
+    public void onEditButtonClick(ActionEvent event) throws IOException {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(Controller.class.getResource("edit-view.fxml"));
+        Parent addParent = loader.load();
+        Scene addScene = new Scene(addParent);
+        stage.setScene(addScene);
+    }
+
     //Delete
     public void onDeleteButtonClick(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

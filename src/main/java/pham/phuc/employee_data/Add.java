@@ -178,7 +178,7 @@ public class Add extends BaseEmployeeServiceImpl {
         return temp;
     }
 
-    // 2.3 Checking if theres is a string "null" in the final output of user's information
+    // 2.4 Checking if theres is a string "null" in the final output of user's information
     // Kiểm tra xem còn thông tin nào thiếu trong thông tin cuối cùng của người dùng hay không
     public String checkEmptyText() {
         String isEmpty = "true";
