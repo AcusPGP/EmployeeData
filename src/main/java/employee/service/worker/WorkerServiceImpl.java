@@ -155,4 +155,9 @@ public class WorkerServiceImpl extends BaseEmployeeServiceImpl implements Worker
         }
         return level;
     }
+
+    @Override
+    public void showSkills(Worker worker) {
+
+    }
 }
