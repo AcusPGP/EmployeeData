@@ -29,6 +29,17 @@ public class Controller extends Application implements Initializable {
     private Label MENU;
     @FXML
     private ContextMenu popUpMenu;
+    @FXML
+    private MenuItem ADD;
+    @FXML
+    private MenuItem SHOW;
+    @FXML
+    private MenuItem EDIT;
+    @FXML
+    private MenuItem DELETE;
+    @FXML
+    private MenuItem COMMENT;
+
     public TableView<Person> realtimeDataTable;
     @FXML
     private TableColumn<Person, Integer> idColumn;

@@ -448,7 +448,7 @@ public class Edit extends BaseEmployeeServiceImpl {
     public void chooseEditLine() {
         Alert emptyText = new Alert(Alert.AlertType.ERROR, "Empty Information Error", ButtonType.OK);
         emptyText.setTitle("Empty Information Error");
-        emptyText.setContentText(MISSING_DATA + " is empty. Please fill properly.");
+        emptyText.setContentText("Please choose a line to edit!");
         emptyText.initModality(Modality.APPLICATION_MODAL);
         emptyText.showAndWait();
         if (emptyText.getResult() == ButtonType.OK) {
@@ -497,18 +497,10 @@ public class Edit extends BaseEmployeeServiceImpl {
         if (editLine.getText().equals(nothing)) {
             chooseEditLine();
         } else {
-            if (ID.getText().equals(nothing)) {
-                ID.setText(oldData[0]);
-            }
-            if (NAME.getText().equals(nothing)) {
-                NAME.setText(oldData[1]);
-            }
-            if (AGE.getText().equals(nothing)) {
-                AGE.setText(oldData[2]);
-            }
-            if (ADDRESS.getText().equals(nothing)) {
-                ADDRESS.setText(oldData[3]);
-            }
+            ID.setText(oldData[0]);
+            NAME.setText(oldData[1]);
+            AGE.setText(oldData[2]);
+            ADDRESS.setText(oldData[3]);
         }
     }
 
