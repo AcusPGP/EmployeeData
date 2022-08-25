@@ -165,4 +165,10 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
         return degree;
     }
 
+    @Override
+    public void showAllDegree(Engineer engineer) {
+            System.out.print("computerCertificate: " + engineer.getComputerCertificate() + " & Specialized: " + engineer.getSpecialized());
+    }
+
+
 }

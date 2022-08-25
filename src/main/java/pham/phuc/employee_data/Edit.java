@@ -165,16 +165,13 @@ public class Edit extends BaseEmployeeServiceImpl {
      */
 
     public void editableRow() {
-        listTableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if (event.getClickCount() == 2) {
-                    String temp = String.valueOf(listTableView.getSelectionModel().getSelectedItems());
-                    String arr = temp.substring(1, temp.length() - 1);
-                    String[] selectedRow = arr.split("@");
-                    oldData = selectedRow;
-                    editLine.setText(selectedRow[0] + " - " + selectedRow[1] + " - " + selectedRow[2] + " - " + selectedRow[3] + " - " + selectedRow[4] + " - " + selectedRow[5]);
-                }
+        listTableView.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                String temp = String.valueOf(listTableView.getSelectionModel().getSelectedItems());
+                String arr = temp.substring(1, temp.length() - 1);
+                String[] selectedRow = arr.split("@");
+                oldData = selectedRow;
+                editLine.setText(selectedRow[0] + " - " + selectedRow[1] + " - " + selectedRow[2] + " - " + selectedRow[3] + " - " + selectedRow[4] + " - " + selectedRow[5]);
             }
         });
     }
