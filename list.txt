@@ -1,0 +1,5 @@
+8@Pham Gia Phuc@16@Ho Chi Minh@Worker@Assistant
+2@Pham Gia Phuc@18@Hanoi@Worker@Manager
+3@Gia Phuc Pham@12@Hanoi@Engineer@Front-end
+4@Phuc Gia@17@Hai Phong@Engineer@Front-end
+6@Gia Phucccc@32@Can Tho@Engineer@Full-stack

@@ -3,6 +3,8 @@ package employee.service;
 import employee.pojo.utils.EmployeeConstants;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public abstract class BaseEmployeeServiceImpl implements BaseService {
@@ -90,11 +92,9 @@ public abstract class BaseEmployeeServiceImpl implements BaseService {
     }
 
 
-    public void delete() throws IOException {
-        System.out.print(EmployeeConstants.INPUT_ID_TO_DELETE);
-        String id = sc.nextLine().trim();
+    public void delete(String id) throws IOException {
         File inputF = new File(EmployeeConstants.LIST_PATH);
-        File tempF = new File(EmployeeConstants.LIST_PATH);
+        File tempF = new File("temp.txt");
         BufferedReader reader = new BufferedReader(new FileReader(inputF));
         BufferedWriter writer = new BufferedWriter(new FileWriter(tempF));
         String currentLine;
@@ -164,5 +164,90 @@ public abstract class BaseEmployeeServiceImpl implements BaseService {
             default -> System.out.println("\n" + "Invalid! Please choose an option in the below menu. ");
         }
         return degree;
+    }
+
+    public int suggestId() throws IOException {
+        int num = 0;
+        File file = new File(EmployeeConstants.LIST_PATH);
+        String currentLine;
+        if (file.length() == 0) {
+            num = 1;
+        } else {
+            ArrayList<Integer> ar = new ArrayList<>();
+            BufferedReader reader = new BufferedReader(new FileReader(EmployeeConstants.LIST_PATH));
+            while ((currentLine = reader.readLine()) != null) {
+                String[] array = currentLine.split("@");
+                ar.add(Integer.parseInt(array[0]));
+            }
+            reader.close();
+            int length = Collections.max(ar);
+            if (length == ar.size()) {
+                num = length + 1;
+            } else {
+                for (int i = 1; i <= length; i++) {
+                    if (ar.contains(i)) {
+                        continue;
+                    } else {
+                        num = i;
+                        return num;
+                    }
+                }
+            }
+        }
+        return num;
+    }
+
+    public int checkId(String id) throws IOException {
+        int result = 0;
+        File check = new File(EmployeeConstants.LIST_PATH);
+        if (check.length() == 0) {
+            return result;
+        } else {
+            BufferedReader reader = new BufferedReader(new FileReader(check));
+            String currentLine;
+            while ((currentLine = reader.readLine()) != null) {
+                String trimmedLine = currentLine.trim();
+                String[] array = trimmedLine.split("@");
+                if (array[0].equals(id)) {
+                    result = -1;
+                    System.out.println("This ID " + "'" + id + "'" + " is aLready had. Please try another id." + "\n");
+                    break;
+                }
+            }
+            reader.close();
+            return result;
+        }
+    }
+
+    public int checkIfIsInteger(String num) {
+        int temp = 0;
+        String nothing = "";
+        if (num.equals(nothing)) {
+            return temp;
+        } else {
+            try {
+                Integer.parseInt(num);
+                return temp;
+            } catch (NumberFormatException e) {
+                temp = -1;
+                return temp;
+            }
+        }
+    }
+
+    public int checkAgeRange(String age) {
+        int temp = 0;
+        String nothing = "";
+        if (age.equals(nothing)) {
+            return temp;
+        } else {
+            int checkAge = Integer.parseInt(age);
+            if (checkAge >= 0 && checkAge <= 100) {
+                return temp;
+            } else {
+                temp = -1;
+                return temp;
+            }
+        }
     }
 }

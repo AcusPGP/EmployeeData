@@ -51,12 +51,17 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
         }
     }
 
+    @Override
+    public void delete() throws IOException {
+
+    }
+
     private boolean checkFileExist() {
         File file = new File(EmployeeConstants.LIST_PATH);
         return file.exists();
     }
 
-    private void addToF(Engineer en) {
+    public void addToF(Engineer en) {
         FileWriter myList = null;
         try {
             if (checkFileExist()) {
@@ -106,59 +111,6 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
                 }
             }
         }
-    }
-
-    public int checkId(String id) throws IOException {
-        int result = 0;
-        File check = new File(EmployeeConstants.LIST_PATH);
-        if (check.length() == 0) {
-            return result;
-        } else {
-            BufferedReader reader = new BufferedReader(new FileReader(check));
-            String currentLine;
-            while ((currentLine = reader.readLine()) != null) {
-                String trimmedLine = currentLine.trim();
-                String[] array = trimmedLine.split("@");
-                if (array[0].equals(id)) {
-                    result = -1;
-                    System.out.println("This ID " + "'" + id + "'" + " is aLready had. Please try another id." + "\n");
-                    break;
-                }
-            }
-            reader.close();
-            return result;
-        }
-    }
-
-    public int suggestId() throws IOException {
-        int num = 0;
-        File file = new File(EmployeeConstants.LIST_PATH);
-        String currentLine;
-        if (file.length() == 0) {
-            num = 1;
-        } else {
-            ArrayList<Integer> ar = new ArrayList<>();
-            BufferedReader reader = new BufferedReader(new FileReader(EmployeeConstants.LIST_PATH));
-            while ((currentLine = reader.readLine()) != null) {
-                String[] array = currentLine.split("@");
-                ar.add(Integer.parseInt(array[0]));
-            }
-            reader.close();
-            int length = Collections.max(ar);
-            if (length == ar.size()) {
-                num = length + 1;
-            } else {
-                for (int i = 1; i <= length; i++) {
-                    if (ar.contains(i)) {
-                        continue;
-                    } else {
-                        num = i;
-                        return num;
-                    }
-                }
-            }
-        }
-        return num;
     }
 
     public String inputName() {
@@ -212,5 +164,11 @@ public class EngineerServiceImpl extends BaseEmployeeServiceImpl implements Engi
         }
         return degree;
     }
+
+    @Override
+    public void showAllDegree(Engineer engineer) {
+            System.out.print("computerCertificate: " + engineer.getComputerCertificate() + " & Specialized: " + engineer.getSpecialized());
+    }
+
 
 }

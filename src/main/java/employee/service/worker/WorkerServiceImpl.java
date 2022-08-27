@@ -51,13 +51,17 @@ public class WorkerServiceImpl extends BaseEmployeeServiceImpl implements Worker
         }
     }
 
+    @Override
+    public void delete() throws IOException {
+
+    }
 
     private boolean checkFileExist() {
         File file = new File(EmployeeConstants.LIST_PATH);
         return file.exists();
     }
 
-    private void addToF(Worker worker) {
+    public void addToF(Worker worker) {
         FileWriter myList = null;
         try {
             if (checkFileExist()) {
@@ -109,58 +113,6 @@ public class WorkerServiceImpl extends BaseEmployeeServiceImpl implements Worker
         }
     }
 
-    public int checkId(String id) throws IOException {
-        int result = 0;
-        File check = new File(EmployeeConstants.LIST_PATH);
-        if (check.length() == 0) {
-            return result;
-        } else {
-            BufferedReader reader = new BufferedReader(new FileReader(check));
-            String currentLine;
-            while ((currentLine = reader.readLine()) != null) {
-                String trimmedLine = currentLine.trim();
-                String[] array = trimmedLine.split("@");
-                if (array[0].equals(id)) {
-                    result = -1;
-                    System.out.println("This ID " + "'" + id + "'" + " is aLready had. Please try another id." + "\n");
-                    break;
-                }
-            }
-            reader.close();
-            return result;
-        }
-    }
-
-    public int suggestId() throws IOException {
-        int num = 0;
-        File file = new File(EmployeeConstants.LIST_PATH);
-        String currentLine;
-        if (file.length() == 0) {
-            num = 1;
-        } else {
-            ArrayList<Integer> ar = new ArrayList<>();
-            BufferedReader reader = new BufferedReader(new FileReader(EmployeeConstants.LIST_PATH));
-            while ((currentLine = reader.readLine()) != null) {
-                String[] array = currentLine.split("@");
-                ar.add(Integer.parseInt(array[0]));
-            }
-            reader.close();
-            int length = Collections.max(ar);
-            if (length == ar.size()) {
-                num = length + 1;
-            } else {
-                for (int i = 1; i <= length; i++) {
-                    if (ar.contains(i)) {
-                        continue;
-                    } else {
-                        num = i;
-                        return num;
-                    }
-                }
-            }
-        }
-        return num;
-    }
 
     public String inputName() {
         System.out.print(EmployeeConstants.INPUT_NAME);
@@ -191,7 +143,7 @@ public class WorkerServiceImpl extends BaseEmployeeServiceImpl implements Worker
 
     public String chooseLevel() {
         System.out.println("Choose level for the worker.");
-        System.out.println("1. Employee");
+        System.out.println("1. Assistant");
         System.out.println("2. Manager");
         System.out.print("Please choose an option: ");
         String option = sc.nextLine().trim();
@@ -202,5 +154,10 @@ public class WorkerServiceImpl extends BaseEmployeeServiceImpl implements Worker
             default -> System.out.println("\n" + "Invalid! Please choose an option in the below menu. ");
         }
         return level;
+    }
+
+    @Override
+    public void showSkills(Worker worker) {
+
     }
 }

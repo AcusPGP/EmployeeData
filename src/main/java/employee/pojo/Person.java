@@ -9,7 +9,6 @@ public class Person implements IGeneral {
     private String level;
 
     public Person(int id, String name, int age, String address, String type, String level) {
-        super();
         this.name = name;
         this.age = age;
         this.address = address;
@@ -77,4 +76,10 @@ public class Person implements IGeneral {
         return id + "@" + name + "@" + age + "@" + address + "@" + type + "@" + level;
     }
 
+    public void setNewId(String newId) {
+        this.id = Integer.parseInt(newId);
+    }
+    public void setNewAge(String newAge) {
+        this.age = Integer.parseInt(newAge);
+    }
 }
